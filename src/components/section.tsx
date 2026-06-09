@@ -32,28 +32,28 @@ export function Section({
   return (
     <section
       id={id}
-      className={cn("scroll-mt-20 py-20 sm:py-24", className)}
+      className={cn("scroll-mt-20 py-24 sm:py-32", className)}
     >
       <div
         className={cn(
-          "mx-auto w-full max-w-5xl px-5 sm:px-6 lg:px-8",
+          "mx-auto w-full max-w-6xl px-5 sm:px-6 lg:px-8",
           containerClassName,
         )}
       >
         {(eyebrow || title || description) && (
-          <FadeIn className="mb-10 max-w-2xl sm:mb-14">
+          <FadeIn className="mb-12 max-w-2xl sm:mb-16">
             {eyebrow && (
-              <p className="mb-2 text-sm font-medium tracking-wide text-brand uppercase">
+              <p className="mb-3 inline-flex items-center gap-2 text-sm font-semibold tracking-wide text-brand uppercase before:h-px before:w-8 before:bg-brand/50">
                 {eyebrow}
               </p>
             )}
             {title && (
-              <h2 className="font-heading text-3xl font-semibold tracking-tight text-balance sm:text-4xl">
+              <h2 className="font-heading text-4xl font-semibold tracking-tight text-balance sm:text-5xl">
                 {title}
               </h2>
             )}
             {description && (
-              <p className="mt-4 text-base text-muted-foreground sm:text-lg">
+              <p className="mt-4 text-lg text-muted-foreground sm:text-xl">
                 {description}
               </p>
             )}

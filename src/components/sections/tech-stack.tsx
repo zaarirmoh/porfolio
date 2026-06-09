@@ -28,12 +28,12 @@ export function TechStack() {
           const Icon = ICONS[group.icon]
           return (
             <FadeIn key={group.label} delay={i * 0.06}>
-              <Card className="h-full gap-4 p-6">
+              <Card className="group/stack h-full gap-5 p-7 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:ring-brand/30">
                 <div className="flex items-center gap-3">
-                  <span className="grid size-9 place-items-center rounded-lg bg-brand/10 text-brand">
-                    <Icon className="size-[1.15rem]" />
+                  <span className="grid size-11 place-items-center rounded-xl bg-brand/10 text-brand transition-transform duration-300 group-hover/stack:scale-110 group-hover/stack:rotate-3">
+                    <Icon className="size-5" />
                   </span>
-                  <h3 className="font-heading text-base font-semibold">
+                  <h3 className="font-heading text-lg font-semibold">
                     {group.label}
                   </h3>
                 </div>
@@ -42,7 +42,7 @@ export function TechStack() {
                     <li key={item}>
                       <Badge
                         variant="secondary"
-                        className="px-2.5 py-1 text-sm font-normal"
+                        className="cursor-default px-3 py-1.5 text-[0.95rem] font-normal transition-all duration-200 hover:-translate-y-0.5 hover:bg-brand/15 hover:text-brand"
                       >
                         {item}
                       </Badge>

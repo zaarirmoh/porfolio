@@ -14,7 +14,7 @@ export function FeaturedProjects() {
       title="Featured Projects"
       description="A few products I've built end-to-end — each one spans the interface, the API, and the data underneath."
     >
-      <div className="grid gap-6 sm:grid-cols-2">
+      <div className="grid gap-7 sm:grid-cols-2">
         {featuredProjects.map((project, i) => (
           <FadeIn key={project.slug} delay={i * 0.08}>
             <ProjectCard project={project} />
@@ -22,11 +22,16 @@ export function FeaturedProjects() {
         ))}
       </div>
 
-      <FadeIn className="mt-10 flex justify-center">
-        <Button variant="outline" size="lg" asChild>
+      <FadeIn className="mt-12 flex justify-center">
+        <Button
+          variant="outline"
+          size="lg"
+          asChild
+          className="h-12 px-6 text-base transition-transform hover:-translate-y-0.5 [&_svg]:size-5"
+        >
           <Link to="/projects">
             See all projects
-            <ArrowRight className="size-4" />
+            <ArrowRight className="transition-transform group-hover/button:translate-x-1" />
           </Link>
         </Button>
       </FadeIn>

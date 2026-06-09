@@ -57,38 +57,35 @@ export function Navbar() {
           : "border-b border-transparent bg-transparent",
       )}
     >
-      <nav className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between px-5 sm:px-6 lg:px-8">
+      <nav className="mx-auto grid h-20 w-full max-w-6xl grid-cols-[1fr_auto_1fr] items-center px-5 sm:px-6 lg:px-8">
         {/* Brand */}
         <Link
           to="/"
-          className="group flex items-center gap-2.5 rounded-md font-heading text-sm font-semibold tracking-tight focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none"
+          className="group flex w-fit items-center gap-3 rounded-md font-heading text-base font-semibold tracking-tight focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none"
           aria-label={`${profile.name} — home`}
         >
-          <span className="grid size-8 place-items-center rounded-lg bg-brand text-brand-foreground text-xs font-bold tabular-nums">
+          <span className="grid size-10 place-items-center rounded-xl bg-brand text-sm font-bold text-brand-foreground tabular-nums shadow-sm transition-transform duration-300 group-hover:-rotate-6 group-hover:scale-105">
             {initials}
           </span>
-          <span className="hidden sm:inline">{profile.name}</span>
+          <span className="hidden lg:inline">{profile.name}</span>
         </Link>
 
-        {/* Desktop nav */}
+        {/* Desktop nav — centered */}
         <div className="hidden items-center gap-1 md:flex">
           {NAV_LINKS.map((link) => (
-            <Button
+            <Link
               key={link.hash}
-              variant="ghost"
-              size="sm"
-              asChild
-              className="text-muted-foreground hover:text-foreground"
+              to={{ pathname: "/", hash: link.hash }}
+              className="group relative px-3.5 py-2 text-[0.95rem] font-medium text-muted-foreground transition-colors hover:text-foreground"
             >
-              <Link to={{ pathname: "/", hash: link.hash }}>{link.label}</Link>
-            </Button>
+              {link.label}
+              <span className="absolute inset-x-3.5 -bottom-0.5 h-0.5 origin-left scale-x-0 rounded-full bg-brand transition-transform duration-300 group-hover:scale-x-100" />
+            </Link>
           ))}
-          <div className="mx-1 h-5 w-px bg-border" />
-          <ThemeToggle />
         </div>
 
-        {/* Mobile controls */}
-        <div className="flex items-center gap-1 md:hidden">
+        {/* Right controls */}
+        <div className="flex items-center justify-end gap-1">
           <ThemeToggle />
           <Button
             variant="ghost"
@@ -97,6 +94,7 @@ export function Navbar() {
             aria-label={menuOpen ? "Close menu" : "Open menu"}
             aria-expanded={menuOpen}
             aria-controls="mobile-menu"
+            className="size-10 md:hidden"
           >
             {menuOpen ? <X className="size-5" /> : <Menu className="size-5" />}
           </Button>
@@ -120,7 +118,7 @@ export function Navbar() {
                   key={link.hash}
                   variant="ghost"
                   asChild
-                  className="justify-start text-base"
+                  className="h-12 justify-start text-base"
                 >
                   <Link to={{ pathname: "/", hash: link.hash }}>
                     {link.label}

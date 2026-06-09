@@ -84,6 +84,21 @@ different ones. (Placeholders currently live at `public/images/profile.svg`.)
 Replace `public/cv.pdf` with your real resume (keep the filename, or update
 `profile.cv`).
 
+### Contact form
+
+The contact form works out of the box with a **`mailto:` fallback** (it opens a
+pre-filled email draft). For a proper async submit with an inline success
+message, set `profile.contactEndpoint` in `src/data/portfolio.ts` to a form
+backend — e.g. create a free form at [Formspree](https://formspree.io) and paste
+its endpoint:
+
+```ts
+contactEndpoint: "https://formspree.io/f/xxxxxxxx",
+```
+
+The form POSTs `{ name, email, message }` as JSON and includes a honeypot field
+for basic spam protection.
+
 ## Deploy to Vercel
 
 `vercel.json` already includes the SPA rewrite so client-side routes like

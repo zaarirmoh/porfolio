@@ -102,6 +102,12 @@ export const profile = {
     "Available for remote roles. Based in UTC+1, with a working day that overlaps a full afternoon of EU hours and the US-East morning. Fluent, professional English — comfortable in async-first teams.",
   location: "Remote · UTC+1",
   email: "hello@example.com",
+  /**
+   * Contact-form backend. Paste a form endpoint here (e.g. Formspree
+   * "https://formspree.io/f/xxxxxx" or Web3Forms) and the form POSTs to it
+   * with inline success/error. Leave empty to fall back to a mailto: draft.
+   */
+  contactEndpoint: "",
   /** CV lives in /public — drop your real PDF at this path to swap it. */
   cv: "/cv.pdf",
   /** Photos live in /public/images — see README notes. Optional. */
@@ -112,6 +118,14 @@ export const profile = {
     linkedin: "https://www.linkedin.com/in/your-handle",
   },
 } as const
+
+/** Rotating phrases for the animated hero title (typewriter). */
+export const heroPhrases: string[] = [
+  "Backend-leaning by default",
+  "Remote · UTC+1 (EU & US-East)",
+  "End-to-end product builder",
+  "APIs, data & clean interfaces",
+]
 
 /* -------------------------------------------------------------------------- */
 /*  Animated stat counters (About section)                                     */

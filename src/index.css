@@ -76,9 +76,9 @@
     --chart-4: oklch(0.371 0 0);
     --chart-5: oklch(0.269 0 0);
     --radius: 0.625rem;
-    --brand: oklch(0.54 0.16 264);
+    --brand: oklch(0.53 0.21 300);
     --brand-foreground: oklch(0.985 0 0);
-    --brand-muted: oklch(0.54 0.16 264 / 10%);
+    --brand-muted: oklch(0.53 0.21 300 / 10%);
     --sidebar: oklch(0.985 0 0);
     --sidebar-foreground: oklch(0.145 0 0);
     --sidebar-primary: oklch(0.205 0 0);
@@ -108,9 +108,9 @@
     --border: oklch(1 0 0 / 10%);
     --input: oklch(1 0 0 / 15%);
     --ring: oklch(0.556 0 0);
-    --brand: oklch(0.72 0.15 264);
+    --brand: oklch(0.72 0.18 300);
     --brand-foreground: oklch(0.145 0 0);
-    --brand-muted: oklch(0.72 0.15 264 / 15%);
+    --brand-muted: oklch(0.72 0.18 300 / 15%);
     --chart-1: oklch(0.87 0 0);
     --chart-2: oklch(0.556 0 0);
     --chart-3: oklch(0.439 0 0);
@@ -144,6 +144,45 @@
   ::selection {
     @apply bg-brand/20 text-foreground;
     }
+}
+
+/* Animated gradient text — used for the hero job title */
+@keyframes gradient-pan {
+  0%,
+  100% {
+    background-position: 0% center;
+  }
+  50% {
+    background-position: 100% center;
+  }
+}
+.animate-gradient-text {
+  background-size: 200% auto;
+  animation: gradient-pan 5s ease-in-out infinite;
+}
+
+/* Slow continuous rotation — used for the hero portrait accent ring */
+@keyframes spin-slow {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.animate-spin-slow {
+  animation: spin-slow 8s linear infinite;
+}
+
+/* Blinking caret for the typewriter */
+@keyframes caret-blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+.animate-caret {
+  animation: caret-blink 1s step-end infinite;
 }
 
 /* Respect users who prefer reduced motion */

@@ -2,7 +2,8 @@ import { ArrowRight, Download } from "lucide-react"
 import { motion, useReducedMotion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { SocialLinks } from "@/components/social-links"
-import { profile } from "@/data/portfolio"
+import { Typewriter } from "@/components/typewriter"
+import { heroPhrases, profile } from "@/data/portfolio"
 
 export function Hero() {
   const reduce = useReducedMotion()
@@ -10,33 +11,30 @@ export function Hero() {
   const container = {
     hidden: {},
     show: {
-      transition: { staggerChildren: reduce ? 0 : 0.08, delayChildren: 0.05 },
+      transition: { staggerChildren: reduce ? 0 : 0.09, delayChildren: 0.05 },
     },
   }
   const item = reduce
     ? { hidden: {}, show: {} }
     : {
-        hidden: { opacity: 0, y: 16 },
+        hidden: { opacity: 0, y: 20 },
         show: {
           opacity: 1,
           y: 0,
-          transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] as const },
+          transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] as const },
         },
       }
 
   return (
     <section className="relative overflow-hidden">
       {/* Soft accent backdrop */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 -z-10"
-      >
-        <div className="absolute -top-32 left-1/2 size-[42rem] -translate-x-1/2 rounded-full bg-brand/10 blur-3xl dark:bg-brand/15" />
+      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
+        <div className="absolute -top-32 left-1/2 size-[46rem] -translate-x-1/2 rounded-full bg-brand/15 blur-3xl dark:bg-brand/20" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_55%,var(--background))]" />
       </div>
 
-      <div className="mx-auto w-full max-w-6xl px-5 pt-32 pb-20 sm:px-6 sm:pt-40 sm:pb-28 lg:px-8">
-        <div className="grid items-center gap-12 lg:grid-cols-[1.4fr_1fr]">
+      <div className="mx-auto w-full max-w-6xl px-5 pt-36 pb-24 sm:px-6 sm:pt-44 sm:pb-32 lg:px-8">
+        <div className="grid items-center gap-12 lg:grid-cols-[1.45fr_1fr]">
           {/* Copy */}
           <motion.div
             variants={container}
@@ -45,7 +43,7 @@ export function Hero() {
             className="max-w-2xl"
           >
             <motion.div variants={item}>
-              <span className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1 text-xs font-medium text-muted-foreground">
+              <span className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-3.5 py-1.5 text-sm font-medium text-muted-foreground">
                 <span className="relative flex size-2">
                   <span className="absolute inline-flex size-full animate-ping rounded-full bg-emerald-500 opacity-75" />
                   <span className="relative inline-flex size-2 rounded-full bg-emerald-500" />
@@ -54,40 +52,63 @@ export function Hero() {
               </span>
             </motion.div>
 
+            <motion.p
+              variants={item}
+              className="mt-7 text-lg font-medium text-muted-foreground sm:text-xl"
+            >
+              Hi, I'm
+            </motion.p>
+
             <motion.h1
               variants={item}
-              className="mt-6 font-heading text-4xl font-semibold tracking-tight text-balance sm:text-5xl lg:text-6xl"
+              className="mt-1 font-heading text-5xl font-semibold tracking-tight text-balance sm:text-6xl lg:text-7xl"
             >
               {profile.name}
             </motion.h1>
 
-            <motion.p
-              variants={item}
-              className="mt-4 text-base font-medium text-brand sm:text-lg"
-            >
-              {profile.positioning}
-            </motion.p>
+            {/* Animated job title */}
+            <motion.div variants={item} className="mt-4">
+              <h2 className="font-heading text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
+                <span className="animate-gradient-text bg-gradient-to-r from-brand via-fuchsia-500 to-brand bg-clip-text text-transparent">
+                  {profile.role}
+                </span>
+              </h2>
+              <p className="mt-2 text-lg text-muted-foreground sm:text-xl">
+                <Typewriter words={heroPhrases} className="font-medium text-foreground" />
+              </p>
+              {/* Full positioning for assistive tech & SEO */}
+              <span className="sr-only">{profile.positioning}</span>
+            </motion.div>
 
             <motion.p
               variants={item}
-              className="mt-5 max-w-xl text-base text-muted-foreground sm:text-lg"
+              className="mt-6 max-w-xl text-lg text-muted-foreground sm:text-xl"
             >
               {profile.valueProp}
             </motion.p>
 
             <motion.div
               variants={item}
-              className="mt-8 flex flex-wrap items-center gap-3"
+              className="mt-9 flex flex-wrap items-center gap-3"
             >
-              <Button size="lg" asChild>
+              <Button
+                size="lg"
+                asChild
+                className="h-12 px-6 text-base transition-transform hover:-translate-y-0.5 [&_svg]:size-5"
+              >
                 <a href="#work">
                   View Projects
-                  <ArrowRight className="size-4" />
+                  <ArrowRight className="transition-transform group-hover/button:translate-x-1" />
                 </a>
               </Button>
-              <Button size="lg" variant="outline" asChild>
+              <Button
+                size="lg"
+                variant="outline"
+                asChild
+                className="h-12 px-6 text-base transition-transform hover:-translate-y-0.5 [&_svg]:size-5"
+              >
                 <a href={profile.cv} download>
-                  <Download className="size-4" />
+                  <Download />
                   Download CV
                 </a>
               </Button>
@@ -95,20 +116,27 @@ export function Hero() {
             </motion.div>
           </motion.div>
 
-          {/* Portrait */}
+          {/* Portrait with rotating accent ring */}
           <motion.div
-            initial={reduce ? false : { opacity: 0, scale: 0.96 }}
+            initial={reduce ? false : { opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-            className="relative mx-auto hidden w-full max-w-xs lg:block"
+            transition={{ duration: 0.6, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
+            className="group relative mx-auto hidden w-full max-w-xs lg:block"
           >
-            <div className="absolute -inset-4 -z-10 rounded-3xl bg-brand/10 blur-2xl" />
-            <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-xl">
-              <img
-                src={profile.heroImage}
-                alt={profile.name}
-                className="aspect-[4/5] size-full object-cover"
+            <div className="absolute -inset-6 -z-10 rounded-[2rem] bg-brand/15 blur-2xl transition-all duration-500 group-hover:bg-brand/25" />
+            {/* Rotating gradient ring */}
+            <div className="relative overflow-hidden rounded-[1.75rem] p-[2.5px]">
+              <div
+                aria-hidden
+                className="animate-spin-slow absolute inset-[-40%] bg-[conic-gradient(from_0deg,var(--brand),transparent_25%,transparent_75%,var(--brand))] opacity-70"
               />
+              <div className="relative overflow-hidden rounded-[1.6rem] border border-border bg-card">
+                <img
+                  src={profile.heroImage}
+                  alt={profile.name}
+                  className="aspect-[4/5] size-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                />
+              </div>
             </div>
           </motion.div>
         </div>
