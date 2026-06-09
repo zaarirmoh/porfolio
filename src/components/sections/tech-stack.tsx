@@ -3,7 +3,7 @@ import type { LucideIcon } from "lucide-react"
 import { Section } from "@/components/section"
 import { FadeIn } from "@/components/fade-in"
 import { Card } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
+import { SkillLogo } from "@/components/skill-logo"
 import { techStack } from "@/data/portfolio"
 import type { SkillGroup } from "@/data/portfolio"
 
@@ -37,16 +37,17 @@ export function TechStack() {
                     {group.label}
                   </h3>
                 </div>
-                <ul className="flex flex-wrap gap-2">
-                  {group.items.map((item) => (
-                    <li key={item}>
-                      <Badge
-                        variant="secondary"
-                        className="cursor-default px-3 py-1.5 text-[0.95rem] font-normal transition-all duration-200 hover:-translate-y-0.5 hover:bg-brand/15 hover:text-brand"
-                      >
+                <ul className="flex flex-wrap gap-2.5">
+                  {group.items.map((item, j) => (
+                    <FadeIn as="li" key={item} delay={i * 0.06 + j * 0.04} y={10}>
+                      <span className="group/chip flex items-center gap-2 rounded-lg border border-border bg-background/60 px-3 py-2 text-[0.95rem] font-medium transition-all duration-200 hover:-translate-y-0.5 hover:border-brand/40 hover:bg-brand/5 hover:shadow-sm">
+                        <SkillLogo
+                          name={item}
+                          className="size-[1.05rem] shrink-0 text-muted-foreground transition-colors duration-200 group-hover/chip:text-brand"
+                        />
                         {item}
-                      </Badge>
-                    </li>
+                      </span>
+                    </FadeIn>
                   ))}
                 </ul>
               </Card>
