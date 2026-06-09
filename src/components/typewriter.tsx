@@ -41,9 +41,11 @@ export function Typewriter({
     }
     // Finished deleting → advance to next word.
     if (deleting && subIndex === 0) {
-      setDeleting(false)
-      setIndex((i) => (i + 1) % words.length)
-      return
+      const t = setTimeout(() => {
+        setDeleting(false)
+        setIndex((i) => (i + 1) % words.length)
+      }, deleteSpeed)
+      return () => clearTimeout(t)
     }
     const t = setTimeout(
       () => setSubIndex((s) => s + (deleting ? -1 : 1)),

@@ -2,11 +2,13 @@ import { Outlet } from "react-router-dom"
 import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
 import { ScrollManager } from "@/components/scroll-manager"
+import { ScrollProgress } from "@/components/scroll-progress"
 
 export function Layout() {
   return (
     <div className="flex min-h-dvh flex-col">
       <ScrollManager />
+      <ScrollProgress />
       {/* Skip link for keyboard users */}
       <a
         href="#main"

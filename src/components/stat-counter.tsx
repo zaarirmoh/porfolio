@@ -13,11 +13,7 @@ export function StatCounter({ value, suffix, label }: Stat) {
   const [display, setDisplay] = useState(0)
 
   useEffect(() => {
-    if (!inView) return
-    if (reduce) {
-      setDisplay(value)
-      return
-    }
+    if (!inView || reduce) return
     const controls = animate(0, value, {
       duration: 1.6,
       ease: [0.22, 1, 0.36, 1],
@@ -26,10 +22,13 @@ export function StatCounter({ value, suffix, label }: Stat) {
     return () => controls.stop()
   }, [inView, value, reduce])
 
+  // With reduced motion we skip the count-up and show the final value.
+  const shown = reduce ? value : display
+
   return (
     <div ref={ref} className="text-center sm:text-left">
       <div className="font-heading text-4xl font-semibold tracking-tight tabular-nums sm:text-5xl">
-        {display}
+        {shown}
         <span className="text-brand">{suffix}</span>
       </div>
       <div className="mt-1 text-sm text-muted-foreground">{label}</div>

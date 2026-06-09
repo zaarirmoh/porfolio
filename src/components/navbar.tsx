@@ -19,7 +19,10 @@ const NAV_LINKS = [
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
+  const [activeSection, setActiveSection] = useState<string | null>(null)
   const location = useLocation()
+  const isHome = location.pathname === "/"
+  const onProjects = location.pathname.startsWith("/projects")
 
   // Subtle elevation once the page is scrolled.
   useEffect(() => {
@@ -29,10 +32,26 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", onScroll)
   }, [])
 
-  // Close the mobile menu whenever the route changes.
+  // Scrollspy: highlight the section currently crossing the viewport middle.
   useEffect(() => {
-    setMenuOpen(false)
-  }, [location.pathname, location.hash])
+    if (!isHome) return
+    const sections = NAV_LINKS.map((l) =>
+      document.getElementById(l.hash),
+    ).filter((el): el is HTMLElement => el !== null)
+    if (sections.length === 0) return
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) setActiveSection(entry.target.id)
+        }
+      },
+      // A thin horizontal band around the middle of the viewport.
+      { rootMargin: "-45% 0px -50% 0px", threshold: 0 },
+    )
+    sections.forEach((s) => observer.observe(s))
+    return () => observer.disconnect()
+  }, [isHome])
 
   // Lock body scroll while the mobile menu is open.
   useEffect(() => {
@@ -47,6 +66,18 @@ export function Navbar() {
     .map((w) => w[0])
     .slice(0, 2)
     .join("")
+
+  const linkClass = (isActive: boolean) =>
+    cn(
+      "group relative px-3.5 py-2 text-[0.95rem] font-medium transition-colors hover:text-foreground",
+      isActive ? "text-foreground" : "text-muted-foreground",
+    )
+
+  const underlineClass = (isActive: boolean) =>
+    cn(
+      "absolute inset-x-3.5 -bottom-0.5 h-0.5 origin-left rounded-full bg-brand transition-transform duration-300",
+      isActive ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100",
+    )
 
   return (
     <header
@@ -72,16 +103,28 @@ export function Navbar() {
 
         {/* Desktop nav — centered */}
         <div className="hidden items-center gap-1 md:flex">
-          {NAV_LINKS.map((link) => (
-            <Link
-              key={link.hash}
-              to={{ pathname: "/", hash: link.hash }}
-              className="group relative px-3.5 py-2 text-[0.95rem] font-medium text-muted-foreground transition-colors hover:text-foreground"
-            >
-              {link.label}
-              <span className="absolute inset-x-3.5 -bottom-0.5 h-0.5 origin-left scale-x-0 rounded-full bg-brand transition-transform duration-300 group-hover:scale-x-100" />
-            </Link>
-          ))}
+          {NAV_LINKS.map((link) => {
+            const isActive = isHome && activeSection === link.hash
+            return (
+              <Link
+                key={link.hash}
+                to={{ pathname: "/", hash: link.hash }}
+                aria-current={isActive ? "true" : undefined}
+                className={linkClass(isActive)}
+              >
+                {link.label}
+                <span className={underlineClass(isActive)} />
+              </Link>
+            )
+          })}
+          <Link
+            to="/projects"
+            aria-current={onProjects ? "page" : undefined}
+            className={linkClass(onProjects)}
+          >
+            Projects
+            <span className={underlineClass(onProjects)} />
+          </Link>
         </div>
 
         {/* Right controls */}
@@ -120,11 +163,23 @@ export function Navbar() {
                   asChild
                   className="h-12 justify-start text-base"
                 >
-                  <Link to={{ pathname: "/", hash: link.hash }}>
+                  <Link
+                    to={{ pathname: "/", hash: link.hash }}
+                    onClick={() => setMenuOpen(false)}
+                  >
                     {link.label}
                   </Link>
                 </Button>
               ))}
+              <Button
+                variant="ghost"
+                asChild
+                className="h-12 justify-start text-base"
+              >
+                <Link to="/projects" onClick={() => setMenuOpen(false)}>
+                  Projects
+                </Link>
+              </Button>
             </div>
           </motion.div>
         )}
