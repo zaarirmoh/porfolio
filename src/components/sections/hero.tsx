@@ -27,8 +27,9 @@ export function Hero() {
 
   return (
     <section className="relative overflow-hidden">
-      {/* Soft accent backdrop */}
+      {/* Soft accent backdrop with a faint blueprint grid */}
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,var(--border)_1px,transparent_1px),linear-gradient(to_bottom,var(--border)_1px,transparent_1px)] bg-[size:56px_56px] opacity-50 [mask-image:radial-gradient(ellipse_75%_65%_at_50%_30%,black_25%,transparent_75%)] dark:opacity-30" />
         <div className="absolute -top-32 left-1/2 size-[46rem] -translate-x-1/2 rounded-full bg-brand/15 blur-3xl dark:bg-brand/20" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_55%,var(--background))]" />
       </div>
