@@ -24,6 +24,9 @@
     --color-ring: var(--ring);
     --color-input: var(--input);
     --color-border: var(--border);
+    --color-brand: var(--brand);
+    --color-brand-foreground: var(--brand-foreground);
+    --color-brand-muted: var(--brand-muted);
     --color-destructive: var(--destructive);
     --color-accent-foreground: var(--accent-foreground);
     --color-accent: var(--accent);
@@ -73,6 +76,9 @@
     --chart-4: oklch(0.371 0 0);
     --chart-5: oklch(0.269 0 0);
     --radius: 0.625rem;
+    --brand: oklch(0.54 0.16 264);
+    --brand-foreground: oklch(0.985 0 0);
+    --brand-muted: oklch(0.54 0.16 264 / 10%);
     --sidebar: oklch(0.985 0 0);
     --sidebar-foreground: oklch(0.145 0 0);
     --sidebar-primary: oklch(0.205 0 0);
@@ -102,6 +108,9 @@
     --border: oklch(1 0 0 / 10%);
     --input: oklch(1 0 0 / 15%);
     --ring: oklch(0.556 0 0);
+    --brand: oklch(0.72 0.15 264);
+    --brand-foreground: oklch(0.145 0 0);
+    --brand-muted: oklch(0.72 0.15 264 / 15%);
     --chart-1: oklch(0.87 0 0);
     --chart-2: oklch(0.556 0 0);
     --chart-3: oklch(0.439 0 0);
@@ -125,6 +134,28 @@
     @apply bg-background text-foreground;
     }
   html {
-    @apply font-sans;
+    @apply font-sans scroll-smooth;
+    }
+  /* Offset anchor targets so the sticky navbar doesn't cover them */
+  :target,
+  [id] {
+    scroll-margin-top: 5rem;
+    }
+  ::selection {
+    @apply bg-brand/20 text-foreground;
+    }
+}
+
+/* Respect users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+    }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
     }
 }
