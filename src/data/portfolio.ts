@@ -319,6 +319,60 @@ export const baccalaureate = {
 
 export const projects: Project[] = [
   {
+    slug: "encash",
+    name: "Encash",
+    problem:
+      "Households in France routinely overpay for electricity because comparing providers means decoding a dense bill and second-guessing which tariff actually fits their usage.",
+    summary:
+      "A web app for a French company where users upload their electricity bill, OCR pulls out the details, and the app recommends the best-value electricity provider for their real consumption. Fully bilingual in French and English.",
+    stack: [
+      "React",
+      "TypeScript",
+      "Redux Toolkit",
+      "Tailwind CSS",
+      "shadcn/ui",
+      "i18next",
+      "FastAPI",
+      "Python",
+      "MongoDB",
+      "OCR",
+      "JWT",
+    ],
+    metrics: [],
+    featured: true,
+    domain: "Energy · SaaS",
+    year: "2026",
+    architecture:
+      "A FastAPI backend over MongoDB (via the Beanie ODM) handles authentication, bill uploads, OCR text extraction, and provider recommendation. Users sign in with JWT, upload a bill, and the backend parses out consumption and tariff details, then matches them against a catalog of electricity providers to surface the best-value option.",
+    frontend:
+      "A React and TypeScript SPA with Redux Toolkit for state and Tailwind CSS with shadcn/ui for the interface. It's internationalized with i18next so the whole app works in both French and English, and talks to the API through Axios.",
+    decisions: [
+      {
+        title: "OCR-driven bill intake",
+        detail:
+          "Users upload a photo or PDF of their bill and an OCR step extracts the consumption and tariff details, so there's nothing to type in by hand.",
+      },
+      {
+        title: "Bilingual from day one",
+        detail:
+          "Built for a French audience, the app is fully internationalized with i18next so it works seamlessly in French and English.",
+      },
+      {
+        title: "Recommendation over a provider catalog",
+        detail:
+          "Extracted consumption is matched against a catalog of electricity providers to recommend the best-value option for each user.",
+      },
+    ],
+    challenges: [
+      {
+        title: "Reading varied bill formats",
+        detail:
+          "Electricity bills differ from one provider to the next, so the OCR and parsing layer has to reliably pull the same fields from inconsistent layouts.",
+      },
+    ],
+    links: {},
+  },
+  {
     slug: "yassir-distribution-platform",
     name: "Yassir Distribution & Inventory Platform",
     problem:
@@ -570,6 +624,63 @@ export const projects: Project[] = [
     ],
     outcome:
       "Shipped a car-rental Android app backed by booking and car-management services, with social sign-in for quick onboarding.",
+    links: {},
+  },
+  {
+    slug: "smart-shopping-cart",
+    name: "Smart Shopping Cart",
+    problem:
+      "Supermarket checkout is slow: shoppers queue while a cashier scans every item one by one, and there's no view of a cart's contents until they reach the till.",
+    summary:
+      "An IoT smart shopping cart that recognizes items as they're added using an ESP32-CAM and an object-detection model, shows a live total on an on-cart screen, and lets shoppers check out in seconds by scanning the cart's RFID tag.",
+    stack: [
+      "ESP32-CAM",
+      "MQTT",
+      "Object Detection",
+      "Computer Vision",
+      "Python",
+      "RFID",
+      "React",
+    ],
+    metrics: [],
+    featured: false,
+    domain: "IoT · Computer Vision",
+    year: "2025",
+    architecture:
+      "Each cart carries an ESP32-CAM that streams video to a central in-store server, where an object-detection model identifies items as they're added. The cart has an LCD screen showing the running list and total, a button to switch modes, and indicator lights for feedback; devices talk to the server over MQTT. That same central server also hosts the cashier and admin backends and frontends. Every cart carries an RFID tag, so at checkout the cashier scans the tag to pull up the cart and everything in it, then takes payment by card or cash.",
+    frontend:
+      "Cashier and admin web interfaces (React) run on the store's central server. The cashier view shows a scanned cart's contents for a one-scan checkout, while the admin side manages the catalog and operations.",
+    decisions: [
+      {
+        title: "Detection at the edge, model on the server",
+        detail:
+          "The ESP32-CAM streams to a central server that runs the object-detection model, keeping the cart hardware cheap while centralizing the heavy compute.",
+      },
+      {
+        title: "MQTT for device messaging",
+        detail:
+          "Carts and server communicate over MQTT, a lightweight protocol well-suited to many constrained IoT devices at once.",
+      },
+      {
+        title: "RFID for instant checkout",
+        detail:
+          "Each cart's RFID tag lets the cashier pull up its full contents with a single scan instead of re-scanning every item, with card and cash payment supported.",
+      },
+    ],
+    challenges: [
+      {
+        title: "One responsive device from many parts",
+        detail:
+          "Coordinating the ESP32-CAM, LCD screen, mode button, and indicator lights into a single responsive cart took careful firmware and messaging.",
+      },
+      {
+        title: "Detecting items in real conditions",
+        detail:
+          "Items are added in varied lighting and angles, so the object-detection model and the video stream had to stay accurate outside of ideal conditions.",
+      },
+    ],
+    outcome:
+      "Delivered a working end-to-end smart-cart flow: items detected on the cart, a live total on the on-cart screen, and a one-scan RFID checkout with card and cash payment.",
     links: {},
   },
 ]
