@@ -155,31 +155,24 @@ export function Navbar() {
             transition={{ duration: 0.2 }}
             className="overflow-hidden border-b border-border bg-background/95 backdrop-blur-md md:hidden"
           >
-            <div className="mx-auto flex w-full max-w-6xl flex-col gap-1 px-4 py-3">
+            <div className="mx-auto flex w-full max-w-6xl flex-col px-4 py-3">
               {NAV_LINKS.map((link) => (
-                <Button
+                <Link
                   key={link.hash}
-                  variant="ghost"
-                  asChild
-                  className="h-12 justify-start text-base"
+                  to={{ pathname: "/", hash: link.hash }}
+                  onClick={() => setMenuOpen(false)}
+                  className="flex h-12 items-center rounded-lg px-3 text-base font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
                 >
-                  <Link
-                    to={{ pathname: "/", hash: link.hash }}
-                    onClick={() => setMenuOpen(false)}
-                  >
-                    {link.label}
-                  </Link>
-                </Button>
-              ))}
-              <Button
-                variant="ghost"
-                asChild
-                className="h-12 justify-start text-base"
-              >
-                <Link to="/projects" onClick={() => setMenuOpen(false)}>
-                  Projects
+                  {link.label}
                 </Link>
-              </Button>
+              ))}
+              <Link
+                to="/projects"
+                onClick={() => setMenuOpen(false)}
+                className="flex h-12 items-center rounded-lg px-3 text-base font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+              >
+                Projects
+              </Link>
             </div>
           </motion.div>
         )}

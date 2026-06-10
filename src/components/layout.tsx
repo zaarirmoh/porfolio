@@ -6,7 +6,7 @@ import { ScrollProgress } from "@/components/scroll-progress"
 
 export function Layout() {
   return (
-    <div className="flex min-h-dvh flex-col">
+    <div className="flex min-h-dvh flex-col overflow-x-hidden">
       <ScrollManager />
       <ScrollProgress />
       {/* Skip link for keyboard users */}
