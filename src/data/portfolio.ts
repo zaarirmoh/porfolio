@@ -255,13 +255,15 @@ export const education = {
   school: "Higher National School of Computer Science (ESI-SBA), Sidi Bel Abbès",
   period: "2022 — 2027",
   detail:
-    "Specializing in Software Engineering and System Design, with coursework spanning distributed systems, scalable architectures, databases, and algorithms.",
+    "Specializing in Software Engineering and System Design, with coursework spanning distributed systems, scalable architectures, embedded systems, IoT, and networking.",
   /** Short chips shown under the degree. */
   focus: [
     "Software Engineering",
-    "Distributed Systems",
     "System Design",
-    "Algorithms",
+    "Distributed Systems",
+    "Embedded Systems",
+    "IoT",
+    "Networking",
   ],
 }
 
