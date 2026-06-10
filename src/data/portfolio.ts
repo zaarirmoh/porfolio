@@ -59,9 +59,15 @@ export type Project = {
 }
 
 export type SkillGroup = {
-  label: "Backend" | "Frontend" | "Infra & DevOps" | "Data"
+  label:
+    | "Backend"
+    | "Frontend"
+    | "Databases"
+    | "DevOps & Infra"
+    | "Mobile"
+    | "Testing & API"
   /** lucide icon key resolved in the TechStack component. */
-  icon: "server" | "code" | "cloud" | "database"
+  icon: "server" | "code" | "database" | "cloud" | "mobile" | "testing"
   items: string[]
 }
 
@@ -146,14 +152,14 @@ export const techStack: SkillGroup[] = [
     label: "Backend",
     icon: "server",
     items: [
-      "Node.js",
-      "NestJS",
       "Python",
+      "Django",
+      "Django REST Framework",
       "FastAPI",
       "REST",
-      "GraphQL",
       "WebSockets",
-      "Auth / OAuth2",
+      "Celery",
+      "JWT",
     ],
   },
   {
@@ -161,32 +167,42 @@ export const techStack: SkillGroup[] = [
     icon: "code",
     items: [
       "React",
+      "Next.js",
       "TypeScript",
+      "JavaScript",
       "Tailwind CSS",
-      "TanStack Query",
-      "Redux Toolkit",
       "shadcn/ui",
-      "Vite",
-      "React Router",
+      "Redux Toolkit",
+      "TanStack Query",
     ],
   },
   {
-    label: "Infra & DevOps",
+    label: "Databases",
+    icon: "database",
+    items: ["PostgreSQL", "Redis", "SQLite", "MongoDB"],
+  },
+  {
+    label: "DevOps & Infra",
     icon: "cloud",
     items: [
       "Docker",
-      "Kubernetes",
-      "GitHub Actions",
-      "AWS",
-      "Terraform",
       "Nginx",
-      "Grafana",
+      "Gunicorn",
+      "GitLab CI/CD",
+      "DigitalOcean",
+      "Linux",
+      "Git",
     ],
   },
   {
-    label: "Data",
-    icon: "database",
-    items: ["PostgreSQL", "Redis", "ClickHouse", "Kafka", "Airflow", "Prisma"],
+    label: "Mobile",
+    icon: "mobile",
+    items: ["Kotlin", "Jetpack Compose"],
+  },
+  {
+    label: "Testing & API",
+    icon: "testing",
+    items: ["pytest", "Postman", "Swagger / OpenAPI"],
   },
 ]
 

@@ -1,4 +1,4 @@
-import { Cloud, Code2, Database, Server } from "lucide-react"
+import { Cloud, Code2, Database, FlaskConical, Server, Smartphone } from "lucide-react"
 import type { LucideIcon } from "lucide-react"
 import { Section } from "@/components/section"
 import { FadeIn } from "@/components/fade-in"
@@ -12,6 +12,8 @@ const ICONS: Record<SkillGroup["icon"], LucideIcon> = {
   code: Code2,
   cloud: Cloud,
   database: Database,
+  mobile: Smartphone,
+  testing: FlaskConical,
 }
 
 export function TechStack() {
@@ -20,7 +22,7 @@ export function TechStack() {
       id="stack"
       eyebrow="Toolbox"
       title="Tech Stack"
-      description="Comfortable across the whole stack — I build the interface and the engine behind it."
+      description="Production-tested tools across the whole stack, from data modeling and APIs to the interface and the pipelines that ship it."
       className="bg-muted/30"
     >
       <div className="grid gap-5 sm:grid-cols-2">
