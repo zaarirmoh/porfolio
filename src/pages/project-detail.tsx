@@ -14,9 +14,9 @@ import {
   TrendingUp,
 } from "lucide-react"
 import type { LucideIcon } from "lucide-react"
-import { motion, useReducedMotion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { StackTags } from "@/components/stack-tags"
+import { ProjectGallery } from "@/components/project-media"
 import { GitHubIcon } from "@/components/icons"
 import { FadeIn } from "@/components/fade-in"
 import { useDocumentTitle } from "@/hooks/use-document-title"
@@ -99,7 +99,6 @@ function ProjectNotFound() {
 export function ProjectDetailPage() {
   const { slug } = useParams<{ slug: string }>()
   const project = slug ? getProject(slug) : undefined
-  const reduce = useReducedMotion()
 
   // Hooks must run unconditionally; title falls back when missing.
   useDocumentTitle(project?.name)
@@ -143,7 +142,7 @@ export function ProjectDetailPage() {
               <Button asChild className="transition-transform hover:-translate-y-0.5">
                 <a href={links.live} target="_blank" rel="noopener noreferrer">
                   <ExternalLink className="size-4" />
-                  Live demo
+                  Live site
                 </a>
               </Button>
             )}
@@ -167,28 +166,19 @@ export function ProjectDetailPage() {
         )}
       </FadeIn>
 
-      {/* Preview image */}
-      {project.screenshot && (
-        <motion.div
-          initial={reduce ? false : { opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          className="mt-10 overflow-hidden rounded-2xl border border-border bg-muted"
-        >
-          <img
-            src={project.screenshot}
-            alt={`${project.name} preview`}
-            className="aspect-[16/9] w-full object-cover"
-          />
-        </motion.div>
-      )}
+      {/* Media — carousel, single image, or branded placeholder */}
+      <FadeIn className="mt-10">
+        <ProjectGallery project={project} />
+      </FadeIn>
 
       {/* Metrics */}
-      <div className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-4">
-        {project.metrics.map((metric) => (
-          <MetricCard key={metric.label} metric={metric} />
-        ))}
-      </div>
+      {project.metrics.length > 0 && (
+        <div className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-4">
+          {project.metrics.map((metric) => (
+            <MetricCard key={metric.label} metric={metric} />
+          ))}
+        </div>
+      )}
 
       <div className="mt-12 space-y-10">
         {/* Problem */}
@@ -196,37 +186,40 @@ export function ProjectDetailPage() {
           <p className="text-muted-foreground">{project.problem}</p>
         </CaseSection>
 
-        {/* Architecture + diagram placeholder */}
-        <CaseSection icon={Network} title="Architecture">
-          <p className="text-muted-foreground">{project.architecture}</p>
-          <div className="mt-5 grid place-items-center rounded-xl border border-dashed border-border bg-muted/40 p-10 text-center">
-            <Network className="size-7 text-muted-foreground" />
-            <p className="mt-2 text-sm font-medium">Architecture diagram</p>
-            <p className="text-xs text-muted-foreground">
-              Drop a diagram here (e.g. /public/projects/{project.slug}-diagram.svg)
-            </p>
-          </div>
-        </CaseSection>
+        {/* Architecture */}
+        {project.architecture && (
+          <CaseSection icon={Network} title="Architecture">
+            <p className="text-muted-foreground">{project.architecture}</p>
+          </CaseSection>
+        )}
 
         {/* Frontend */}
-        <CaseSection icon={MonitorSmartphone} title="Frontend">
-          <p className="text-muted-foreground">{project.frontend}</p>
-        </CaseSection>
+        {project.frontend && (
+          <CaseSection icon={MonitorSmartphone} title="Frontend">
+            <p className="text-muted-foreground">{project.frontend}</p>
+          </CaseSection>
+        )}
 
         {/* Stack & key decisions */}
-        <CaseSection icon={Lightbulb} title="Stack & key decisions">
-          <KeyPointList points={project.decisions} />
-        </CaseSection>
+        {project.decisions && project.decisions.length > 0 && (
+          <CaseSection icon={Lightbulb} title="Stack & key decisions">
+            <KeyPointList points={project.decisions} />
+          </CaseSection>
+        )}
 
         {/* Challenges / trade-offs */}
-        <CaseSection icon={Puzzle} title="Challenges & trade-offs">
-          <KeyPointList points={project.challenges} />
-        </CaseSection>
+        {project.challenges && project.challenges.length > 0 && (
+          <CaseSection icon={Puzzle} title="Challenges & trade-offs">
+            <KeyPointList points={project.challenges} />
+          </CaseSection>
+        )}
 
         {/* Outcome */}
-        <CaseSection icon={TrendingUp} title="Outcome & metrics">
-          <p className="text-muted-foreground">{project.outcome}</p>
-        </CaseSection>
+        {project.outcome && (
+          <CaseSection icon={TrendingUp} title="Outcome & metrics">
+            <p className="text-muted-foreground">{project.outcome}</p>
+          </CaseSection>
+        )}
 
         {/* Links */}
         {hasLinks && (

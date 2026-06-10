@@ -33,28 +33,33 @@ export type Project = {
   problem: string
   /** A sentence or two of context shown on cards and detail header. */
   summary: string
-  /** Flat list of tech tags — powers card pills and the /projects tag filter. */
+  /** Flat list of tech tags — powers the card pills. */
   stack: string[]
   /** Hard numbers. Cards surface the first one; detail page shows them all. */
   metrics: Metric[]
   /** Featured projects appear on the landing page. */
   featured: boolean
-  /** Optional preview image (path under /public). Rendered when present. */
-  screenshot?: string
+  /**
+   * Preview images (paths under /public). The first is the card thumbnail;
+   * the detail page shows them all in a carousel. Empty/undefined → a
+   * branded placeholder is rendered instead.
+   */
+  screenshots?: string[]
   /** Short domain label, e.g. "Logistics". */
   domain: string
   year: string
-  /* ----- case-study body (same template for every project) ----- */
+  /* ----- case-study body — every field optional so a project can be
+     as light or as deep as its real detail allows ----- */
   /** Backend / system architecture write-up. */
-  architecture: string
+  architecture?: string
   /** Frontend ownership: UI decisions, state management, key interactions. */
-  frontend: string
+  frontend?: string
   /** Stack & key engineering decisions. */
-  decisions: KeyPoint[]
+  decisions?: KeyPoint[]
   /** Challenges and the trade-offs made. */
-  challenges: KeyPoint[]
+  challenges?: KeyPoint[]
   /** Outcome & impact narrative. */
-  outcome: string
+  outcome?: string
   links: { live?: string; repo?: string; docs?: string }
 }
 
@@ -314,374 +319,258 @@ export const baccalaureate = {
 
 export const projects: Project[] = [
   {
-    slug: "distribution-inventory-platform",
-    name: "Distribution & Inventory Platform",
+    slug: "yassir-distribution-platform",
+    name: "Yassir Distribution & Inventory Platform",
     problem:
-      "Wholesale orders were entered by hand across spreadsheets, causing stockouts and slow fulfillment.",
+      "A regional distribution operation ran orders, stock, and finances across disconnected tools, with no reliable real-time view of inventory or money owed across its different roles.",
     summary:
-      "A full-stack platform that unifies catalog, inventory, and order entry for a regional distributor — from the warehouse React UI down to a normalized PostgreSQL core.",
+      "A large-scale distribution and inventory management platform for Yassir, serving up to 1,000 concurrent users across five operational roles, with deep financial workflows and full inventory traceability.",
     stack: [
-      "React",
-      "TypeScript",
-      "TanStack Query",
-      "NestJS",
+      "Django",
+      "Django REST Framework",
       "PostgreSQL",
       "Redis",
-      "Docker",
-    ],
-    metrics: [
-      { label: "faster order entry", value: "40%", side: "frontend" },
-      { label: "p95 API latency", value: "180ms", side: "backend" },
-      { label: "normalized tables", value: "150+", side: "data" },
-      { label: "uptime", value: "99.95%", side: "backend" },
-    ],
-    featured: true,
-    screenshot: "/projects/distribution-inventory-platform.svg",
-    domain: "Logistics",
-    year: "2024",
-    architecture:
-      "A NestJS modular monolith fronts a normalized PostgreSQL schema (150+ tables) covering catalog, pricing, inventory ledgers, and orders. Inventory movements are stored as an append-only ledger rather than mutable counts, so any stock level is reproducible at a point in time. Redis backs hot reads (price lists, availability) and a small queue for label generation. Everything runs in Docker behind a single typed OpenAPI contract.",
-    frontend:
-      "The warehouse UI is a React + TypeScript SPA built for speed at a counter: keyboard-first order entry, optimistic updates via TanStack Query, and a virtualized catalog grid that stays smooth at 10k+ SKUs. State is split between server cache (TanStack Query) and a thin Redux slice for the active order. shadcn/ui + Tailwind keep the surface consistent and accessible, with full keyboard navigation for power users.",
-    decisions: [
-      {
-        title: "Append-only inventory ledger",
-        detail:
-          "Chose an event-sourced ledger over mutable stock columns so corrections and audits never lose history. Current stock is a materialized view refreshed on write.",
-      },
-      {
-        title: "TanStack Query as the data layer",
-        detail:
-          "Kept server state out of Redux entirely — caching, retries, and optimistic updates live in TanStack Query, leaving Redux for genuinely local UI state only.",
-      },
-      {
-        title: "One typed contract",
-        detail:
-          "Generated TS types from the OpenAPI spec so the React client and NestJS server can never drift on a payload shape.",
-      },
-    ],
-    challenges: [
-      {
-        title: "Concurrent stock writes",
-        detail:
-          "Two clerks fulfilling the same SKU could oversell. Solved with row-level locking on the ledger and a retry-with-backoff path surfaced as a gentle UI nudge rather than a hard error.",
-      },
-      {
-        title: "Offline-ish counters",
-        detail:
-          "Warehouse Wi-Fi drops. The order form queues mutations locally and reconciles on reconnect, trading a little complexity for far fewer lost entries.",
-      },
-    ],
-    outcome:
-      "Order-entry time dropped ~40%, stockouts fell sharply once availability became real-time, and the team now trusts a single source of truth instead of five spreadsheets.",
-    links: {
-      live: "https://example.com",
-      repo: "https://github.com/zaarirmoh",
-      docs: "https://example.com/docs",
-    },
-  },
-  {
-    slug: "ai-bill-comparison-saas",
-    name: "AI Bill-Comparison SaaS",
-    problem:
-      "Consumers overpay on utility bills because comparing tariffs means reading dense PDFs nobody reads.",
-    summary:
-      "A SaaS that ingests a user's bill, extracts the line items with an LLM pipeline, and shows a clear, interactive breakdown of cheaper alternatives — full-stack, from upload to dashboard.",
-    stack: [
-      "React",
-      "TypeScript",
-      "Redux Toolkit",
-      "FastAPI",
-      "Python",
-      "PostgreSQL",
       "Celery",
+      "Docker",
+      "Nginx",
+      "GitLab CI/CD",
+      "DigitalOcean",
     ],
     metrics: [
-      { label: "extraction accuracy", value: "97%", side: "data" },
-      { label: "docs / day", value: "50k", side: "backend" },
-      { label: "time-to-result (UI)", value: "<3s", side: "frontend" },
-      { label: "avg. saving surfaced", value: "$220/yr", side: "data" },
+      { label: "concurrent users", value: "1,000", side: "backend" },
+      { label: "PostgreSQL tables", value: "150+", side: "data" },
+      { label: "REST API endpoints", value: "500+", side: "backend" },
+      { label: "operational roles", value: "5", side: "backend" },
     ],
     featured: true,
-    screenshot: "/projects/ai-bill-comparison-saas.svg",
-    domain: "FinTech · AI",
-    year: "2023",
+    domain: "Logistics · ERP",
+    year: "2025",
     architecture:
-      "A FastAPI service accepts uploads and hands them to a Celery worker pool that runs OCR, an LLM extraction step, and a deterministic validation pass before persisting structured line items in PostgreSQL. The pipeline is idempotent and replayable — every document keeps its raw input so an improved model can re-process history. A pricing engine then matches extracted usage against a tariff catalog.",
-    frontend:
-      "The dashboard is a React + TypeScript SPA. Uploads stream progress over WebSockets so the user sees parsing happen live instead of staring at a spinner. Redux Toolkit holds the multi-step comparison wizard state; charts are rendered with an accessible, theme-aware component set. The result view is fully responsive and readable on a phone, where most bills are photographed.",
+      "A Django and Django REST Framework backend sits over a highly normalized PostgreSQL schema of 150+ tables, covering inventory control, financial accounting, supplier and client ledgers, rentals, penalties, and audit logging. Redis and Celery (with Celery Beat) run scheduled jobs, financial calculations, and background processing off the request path. Everything is containerized with Docker and deployed on DigitalOcean behind Nginx and Gunicorn, with GitLab CI/CD pipelines for delivery.",
     decisions: [
       {
-        title: "LLM + deterministic validator",
+        title: "Highly normalized 150+ table schema",
         detail:
-          "The model proposes structured fields; a rules layer rejects anything that doesn't reconcile to the bill total. This bounded the LLM's failure modes and pushed accuracy to 97%.",
+          "Modeled inventory, accounting, ledgers, rentals, and audit logging into a normalized PostgreSQL schema so every stock level and balance stays consistent and auditable.",
       },
       {
-        title: "Keep raw inputs forever",
+        title: "Async pipelines with Celery + Redis",
         detail:
-          "Storing the original document made the pipeline replayable, so model upgrades retroactively improve old results with no user action.",
+          "Moved financial calculations and scheduled jobs into Celery workers backed by Redis, keeping the API responsive while heavy work runs in the background.",
       },
       {
-        title: "WebSocket progress",
+        title: "Batch-level inventory traceability",
         detail:
-          "Parsing can take a few seconds; live progress over WebSockets cut perceived wait and support tickets about 'stuck' uploads.",
+          "Tracked stock at batch level with expiry monitoring, stock transfers, and automated alerts, so inventory movements can be traced and reconciled over time.",
       },
     ],
     challenges: [
       {
-        title: "Wildly varied PDFs",
+        title: "Keeping financial state correct under load",
         detail:
-          "Every provider formats bills differently. A template-free, LLM-first approach generalized far better than the brittle regex parsers we started with.",
+          "Credit management, debt tracking, automated ledger entries, and payment reconciliation had to stay correct while many users acted at once. A ledger-based accounting model and async reconciliation kept balances trustworthy.",
       },
       {
-        title: "Cost per document",
+        title: "Serving 1,000 concurrent users",
         detail:
-          "LLM calls aren't free at 50k/day. Caching by document hash and a cheap pre-filter for already-seen layouts kept inference spend flat as volume grew.",
+          "Supporting a thousand concurrent users across five roles meant offloading heavy work to background workers and caching hot reads in Redis to hold latency down.",
       },
     ],
     outcome:
-      "Reached first paying customers within a quarter; the average surfaced saving of ~$220/year became the headline conversion driver, and the replayable pipeline meant each model upgrade lifted accuracy across the whole history.",
-    links: {
-      live: "https://example.com",
-      repo: "https://github.com/zaarirmoh",
-      docs: "https://example.com/docs",
-    },
+      "Replaced a patchwork of tools with a single platform for a 1,000-user distribution operation, with traceable inventory, reliable financial workflows, and changes shipped through GitLab CI/CD.",
+    links: {},
   },
   {
-    slug: "iot-vision-system",
-    name: "IoT Vision System",
+    slug: "lift-cable-platform",
+    name: "Lift & Cable Management Platform",
     problem:
-      "A retail chain had no reliable, real-time view of shelf availability across hundreds of stores.",
+      "A lift and cable installation company tracked projects, inventory, and invoicing by hand, with nothing tying clients, jobs, stock, and finances together.",
     summary:
-      "An edge-to-cloud computer-vision platform: cameras detect empty shelves on-device and stream events to a backend that turns 8M daily signals into actionable alerts.",
-    stack: ["Python", "FastAPI", "ClickHouse", "Kafka", "React", "Grafana"],
-    metrics: [
-      { label: "events / day", value: "8M", side: "backend" },
-      { label: "edge reliability", value: "99.9%", side: "backend" },
-      { label: "storage saved", value: "35%", side: "data" },
-      { label: "alert latency", value: "<5s", side: "backend" },
-    ],
-    featured: true,
-    screenshot: "/projects/iot-vision-system.svg",
-    domain: "IoT · Computer Vision",
-    year: "2022",
-    architecture:
-      "Inference runs on-device; only compact detection events leave the camera, flowing through Kafka into a stream processor that aggregates by store and shelf. Hot events land in ClickHouse for sub-second analytical queries, with older raw data tiered to object storage. FastAPI exposes the query and alerting API; an ops React dashboard visualizes availability and trends.",
-    frontend:
-      "An operations dashboard in React surfaces a live store grid, drill-down shelf views, and trend charts. It leans on TanStack Query for polling-free live updates and a virtualized table for the long tail of stores. The UI is built so a regional manager on a tablet sees the same clear signal as an analyst on a wide monitor.",
-    decisions: [
-      {
-        title: "Push inference to the edge",
-        detail:
-          "Sending only events — not video — slashed bandwidth and made the system viable over ordinary store connections.",
-      },
-      {
-        title: "ClickHouse for hot analytics",
-        detail:
-          "Column storage made 'empty-shelf minutes by store this week' a sub-second query instead of a batch job.",
-      },
-      {
-        title: "Tiered hot/cold storage",
-        detail:
-          "Aging raw events to S3 cut storage spend 35% while keeping recent data instantly queryable.",
-      },
-    ],
-    challenges: [
-      {
-        title: "Flaky field connectivity",
-        detail:
-          "Edge devices lose network constantly. A store-and-forward buffer with idempotent ingestion took end-to-end reliability from 92% to 99.9%.",
-      },
-      {
-        title: "Alert noise",
-        detail:
-          "Raw detections were too jittery to alert on. Time-windowed aggregation turned flickering signals into trustworthy, low-noise alerts.",
-      },
-    ],
-    outcome:
-      "Store teams get empty-shelf alerts within seconds, lost-sales from stockouts dropped measurably, and the platform now scales to new stores by shipping a camera, not a server.",
-    links: {
-      live: "https://example.com",
-      repo: "https://github.com/zaarirmoh",
-    },
-  },
-  {
-    slug: "realtime-collab-workspace",
-    name: "Realtime Collaboration Workspace",
-    problem:
-      "Distributed teams needed a shared planning canvas where edits appear instantly without conflicts.",
-    summary:
-      "A full-stack collaborative workspace with live multiplayer editing — a CRDT-backed sync engine on the backend and a fluid, presence-aware React canvas on the front.",
+      "A complete enterprise management platform for a lift and cable installation company, covering the full project lifecycle, inventory, invoicing, scheduling, and analytics.",
     stack: [
+      "Django REST Framework",
       "React",
       "TypeScript",
-      "Zustand",
-      "Node.js",
-      "WebSockets",
-      "Redis",
+      "Tailwind CSS",
       "PostgreSQL",
+      "JWT",
+    ],
+    metrics: [],
+    featured: true,
+    domain: "Enterprise · ERP",
+    year: "2025",
+    architecture:
+      "A Django REST Framework backend models the full project lifecycle: client registration, project creation, verification workflows, employer assignment, and maintenance scheduling. Inventory is tracked in real time with reorder alerts and profit-margin calculations, and a flexible multi-line invoicing system ties products to financial tracking. Access is secured with JWT authentication and role-based access control.",
+    frontend:
+      "A React and TypeScript front end with Tailwind CSS, including an interactive scheduling and maintenance calendar with advanced filtering, and an analytics dashboard surfacing financial and operational insights.",
+    decisions: [
+      {
+        title: "One system for the whole lifecycle",
+        detail:
+          "Unified client registration, projects, verification, employer assignment, and maintenance into a single workflow instead of separate, disconnected tools.",
+      },
+      {
+        title: "Real-time inventory with margins",
+        detail:
+          "Stock tracking with reorder alerts and profit-margin calculations so operations and finance read from the same source of truth.",
+      },
+      {
+        title: "JWT + role-based access",
+        detail:
+          "Secured the platform with JWT auth and RBAC so each role only sees and does what it should.",
+      },
+    ],
+    challenges: [
+      {
+        title: "Flexible multi-line invoicing",
+        detail:
+          "Invoices had to combine multiple products and line items while staying tied to financial tracking. A flexible invoice model handled varied billing without bespoke code per case.",
+      },
+      {
+        title: "Scheduling teams can trust",
+        detail:
+          "Project and maintenance planning needed an interactive calendar with advanced filtering so teams could plan and re-plan quickly.",
+      },
+    ],
+    outcome:
+      "Replaced manual project and invoice tracking with one platform spanning clients, jobs, inventory, invoicing, scheduling, and analytics.",
+    links: {},
+  },
+  {
+    slug: "university-fyp-platform",
+    name: "Final-Year Project Management Platform",
+    problem:
+      "Running final-year projects across many students and supervisors meant scattered spreadsheets and email, with no shared place to track a project through its lifecycle.",
+    summary:
+      "A university platform managing 60+ final-year projects and 200+ users through the full project lifecycle, with real-time collaboration.",
+    stack: [
+      "Django",
+      "Django REST Framework",
+      "Django Channels",
+      "Redis",
+      "React",
+      "Docker",
+      "Swagger / OpenAPI",
     ],
     metrics: [
-      { label: "sync latency", value: "<80ms", side: "backend" },
-      { label: "concurrent editors", value: "200+", side: "backend" },
-      { label: "frame rate (UI)", value: "60fps", side: "frontend" },
-      { label: "conflict rate", value: "0", side: "data" },
+      { label: "projects managed", value: "60+", side: "data" },
+      { label: "users", value: "200+", side: "backend" },
     ],
     featured: true,
-    screenshot: "/projects/realtime-collab-workspace.svg",
-    domain: "Productivity",
+    domain: "EdTech",
+    year: "2025",
+    architecture:
+      "A Django and DRF backend manages the full final-year-project lifecycle for 60+ projects and 200+ users. Real-time collaboration is powered by Django Channels over Redis, and the system runs as a modular, containerized architecture with Docker. The API is fully documented with Swagger via drf-yasg.",
+    frontend:
+      "Interfaces for students and supervisors to move projects through each stage, with live updates so collaborators see changes as they happen.",
+    decisions: [
+      {
+        title: "Real-time over Channels + Redis",
+        detail:
+          "Used Django Channels with a Redis layer so project updates appear live, without polling.",
+      },
+      {
+        title: "Documented API with Swagger",
+        detail:
+          "Generated full API docs with drf-yasg so the frontend and any integrators always work against a current contract.",
+      },
+      {
+        title: "Containerized from the start",
+        detail:
+          "Packaged the system with Docker for a modular, reproducible setup across environments.",
+      },
+    ],
+    challenges: [
+      {
+        title: "Coordinating several roles",
+        detail:
+          "Students, supervisors, and admins needed different views over the same projects; the data model and permissions kept each role's workflow clean.",
+      },
+    ],
+    outcome:
+      "Gave a department one place to run 60+ final-year projects for 200+ users, with live collaboration replacing scattered spreadsheets and email.",
+    links: {},
+  },
+  {
+    slug: "state-library-tisemsilt",
+    name: "State Library Platform — Tisemsilt",
+    problem:
+      "The official state library needed a modern, fast platform for thousands of monthly users, working with its existing PMB library system rather than replacing it.",
+    summary:
+      "A full-stack platform for the official State Library of Tisemsilt, serving thousands of monthly users and integrating with the PMB library system.",
+    stack: ["Django", "PostgreSQL", "Redis", "Docker"],
+    metrics: [
+      { label: "faster via Redis caching", value: "40%", side: "backend" },
+      { label: "monthly users", value: "1,000s", side: "backend" },
+    ],
+    featured: false,
+    domain: "Public Sector",
+    year: "2025",
+    architecture:
+      "A Django backend over PostgreSQL, integrated with the library's existing PMB system through JRPC web services. Redis caching cut response times by 40%, and the platform is containerized with Docker for scalable, reproducible deployment.",
+    frontend:
+      "A public-facing interface for thousands of monthly library users, built to stay fast under load.",
+    decisions: [
+      {
+        title: "Integrate, don't replace",
+        detail:
+          "Connected to the library's existing PMB system over JRPC web services instead of rebuilding it, meeting users where their data already lived.",
+      },
+      {
+        title: "Redis caching for speed",
+        detail:
+          "Cached hot reads in Redis, cutting response times by 40% for a public audience of thousands.",
+      },
+    ],
+    challenges: [
+      {
+        title: "Bridging a legacy system",
+        detail:
+          "PMB's JRPC interface had to be wrapped cleanly so the new platform could serve its data reliably to the public.",
+      },
+    ],
+    outcome:
+      "Delivered a fast, scalable public platform for the state library, 40% quicker after Redis caching and integrated with its existing catalog.",
+    links: {},
+  },
+  {
+    slug: "lotok-car-rental",
+    name: "Lotok — Car Rental Platform",
+    problem:
+      "A car-rental service needed a mobile app and backend for browsing, booking, and managing cars, with quick, low-friction sign-in.",
+    summary:
+      "A car-rental platform with a native Android app and backend services for authentication, booking, and car management.",
+    stack: ["Kotlin", "Jetpack Compose", "Django", "PostgreSQL", "Docker"],
+    metrics: [],
+    featured: false,
+    domain: "Mobile · Marketplace",
     year: "2024",
     architecture:
-      "A Node.js WebSocket gateway fans out document operations through Redis pub/sub so any server can serve any room. Documents are CRDTs, so concurrent edits merge deterministically without a central lock; snapshots are persisted to PostgreSQL for durability and fast room loads. Presence and cursors ride a lightweight ephemeral channel separate from the durable document stream.",
+      "Backend services handle authentication, booking, and car management, with Google and Facebook sign-in integrated. Services are containerized for clean frontend-to-backend integration.",
     frontend:
-      "The canvas is a React + TypeScript app tuned for 60fps under constant remote updates. Local state lives in Zustand, decoupled from the network layer so the UI never blocks on a socket. Remote cursors, selections, and presence avatars animate with Framer Motion; optimistic local edits apply instantly and reconcile when the authoritative op returns. Everything is keyboard accessible and theme-aware.",
+      "A native Android app built with Kotlin and Jetpack Compose for browsing cars, booking, and managing rentals.",
     decisions: [
       {
-        title: "CRDTs over operational transform",
+        title: "Native Android with Compose",
         detail:
-          "CRDTs gave conflict-free merges without a central authority, which kept the server simple and made offline edits reconcile cleanly.",
+          "Built the app in Kotlin with Jetpack Compose for a modern, declarative UI.",
       },
       {
-        title: "Split durable vs. ephemeral channels",
+        title: "Social sign-in",
         detail:
-          "Cursors and presence are high-frequency but disposable, so they bypass persistence entirely — keeping the durable write path lean.",
-      },
-      {
-        title: "Zustand, not Redux, on the canvas",
-        detail:
-          "The hot path needed minimal-overhead updates many times per second; a tiny Zustand store beat the ceremony of Redux here.",
+          "Integrated Google and Facebook authentication to lower the barrier to a first booking.",
       },
     ],
     challenges: [
       {
-        title: "Keeping 60fps under load",
+        title: "Smooth mobile-to-backend flow",
         detail:
-          "Naive re-renders tanked the frame rate with 200 editors. Batching remote ops per animation frame and memoizing the render tree held it at 60fps.",
-      },
-      {
-        title: "Horizontal scaling of rooms",
-        detail:
-          "A single server couldn't hold every room. Redis pub/sub made servers stateless so rooms rebalance freely behind a load balancer.",
+          "Containerized services kept the app and backend in sync across environments for reliable booking flows.",
       },
     ],
     outcome:
-      "Teams plan together in real time with no perceptible lag and zero merge conflicts; the stateless design lets the service scale rooms horizontally without sticky sessions.",
-    links: {
-      live: "https://example.com",
-      repo: "https://github.com/zaarirmoh",
-      docs: "https://example.com/docs",
-    },
-  },
-  {
-    slug: "payments-reconciliation-service",
-    name: "Payments Reconciliation Service",
-    problem:
-      "Finance closed the books late every month because gateway payouts never matched internal orders cleanly.",
-    summary:
-      "An event-driven service that reconciles payment-gateway settlements against internal orders automatically, flagging only the genuine exceptions.",
-    stack: ["Python", "FastAPI", "PostgreSQL", "Kafka", "Airflow"],
-    metrics: [
-      { label: "auto-matched", value: "98.5%", side: "data" },
-      { label: "monthly close", value: "−4 days", side: "data" },
-      { label: "throughput", value: "50k/day", side: "backend" },
-    ],
-    featured: false,
-    screenshot: "/projects/payments-reconciliation-service.svg",
-    domain: "FinTech",
-    year: "2023",
-    architecture:
-      "Settlement files and internal order events stream through Kafka into idempotent matching workers. A deterministic rules engine matches on amount, reference, and time window, escalating only true mismatches to a review queue. Airflow orchestrates daily settlement imports and a nightly integrity check; PostgreSQL stores the immutable match ledger.",
-    frontend:
-      "A lightweight exceptions console (React + TypeScript) lets finance review only the unmatched tail. It favors dense, scannable tables, saved filters, and one-click resolution actions — built for speed of triage rather than visual flourish.",
-    decisions: [
-      {
-        title: "Idempotent, replayable workers",
-        detail:
-          "Every match is keyed so re-processing a settlement file can never double-count — essential for financial correctness.",
-      },
-      {
-        title: "Escalate exceptions only",
-        detail:
-          "Auto-matching the 98.5% removed the busywork and let humans focus on the genuinely ambiguous 1.5%.",
-      },
-    ],
-    challenges: [
-      {
-        title: "Fuzzy references",
-        detail:
-          "Gateways mangle reference fields. A tiered matcher (exact → normalized → windowed-amount) recovered most of the messy long tail.",
-      },
-      {
-        title: "Auditability",
-        detail:
-          "Finance needs to trust every match. An immutable ledger with full lineage made each decision explainable on demand.",
-      },
-    ],
-    outcome:
-      "Auto-matching hit 98.5%, pulling four days out of the monthly close and turning reconciliation from a dreaded chore into a quick exception review.",
-    links: {
-      repo: "https://github.com/zaarirmoh",
-      docs: "https://example.com/docs",
-    },
-  },
-  {
-    slug: "developer-analytics-dashboard",
-    name: "Developer Analytics Dashboard",
-    problem:
-      "Engineering leads had no shared view of delivery health — data lived in five disconnected tools.",
-    summary:
-      "A full-stack analytics dashboard that pulls signals from Git, CI, and incident tools into one fast, drill-downable view of delivery health.",
-    stack: [
-      "React",
-      "TypeScript",
-      "TanStack Query",
-      "Node.js",
-      "GraphQL",
-      "ClickHouse",
-    ],
-    metrics: [
-      { label: "data sources unified", value: "5", side: "data" },
-      { label: "dashboard load", value: "<1s", side: "frontend" },
-      { label: "metrics tracked", value: "30+", side: "data" },
-    ],
-    featured: false,
-    screenshot: "/projects/developer-analytics-dashboard.svg",
-    domain: "Developer Tools",
-    year: "2022",
-    architecture:
-      "Connectors pull from Git, CI, and incident APIs on a schedule into ClickHouse, where DORA-style metrics are computed as materialized views. A Node.js GraphQL gateway lets the client ask for exactly the slices it needs, keeping payloads tight and queries fast.",
-    frontend:
-      "A React + TypeScript dashboard with composable, drill-downable charts. TanStack Query handles caching and background refresh so panels feel instant; URL-synced filters make any view shareable. Layout is responsive from a lead's laptop to a wall-mounted team display, and fully theme-aware.",
-    decisions: [
-      {
-        title: "GraphQL for flexible slices",
-        detail:
-          "Dashboards ask for many different cuts of the same data; GraphQL avoided a sprawl of bespoke REST endpoints.",
-      },
-      {
-        title: "Pre-compute in ClickHouse",
-        detail:
-          "Materialized views turned heavy aggregations into sub-second reads, keeping the dashboard under a one-second load.",
-      },
-    ],
-    challenges: [
-      {
-        title: "Inconsistent source data",
-        detail:
-          "Each tool models 'a deploy' differently. A normalization layer mapped them to a shared event schema before metrics were computed.",
-      },
-      {
-        title: "Shareable state",
-        detail:
-          "Leads wanted to send a link to an exact view. Encoding filters in the URL made every drill-down bookmarkable and shareable.",
-      },
-    ],
-    outcome:
-      "Engineering leads finally share one source of truth for delivery health; weekly reviews that used to mean stitching five tabs together now start from a single, fast dashboard.",
-    links: {
-      live: "https://example.com",
-      repo: "https://github.com/zaarirmoh",
-    },
+      "Shipped a car-rental Android app backed by booking and car-management services, with social sign-in for quick onboarding.",
+    links: {},
   },
 ]
 
@@ -694,8 +583,3 @@ export const featuredProjects = projects.filter((p) => p.featured)
 export function getProject(slug: string): Project | undefined {
   return projects.find((p) => p.slug === slug)
 }
-
-/** Unique, sorted list of every tag across all projects (for the filter UI). */
-export const allTags: string[] = Array.from(
-  new Set(projects.flatMap((p) => p.stack)),
-).sort((a, b) => a.localeCompare(b))

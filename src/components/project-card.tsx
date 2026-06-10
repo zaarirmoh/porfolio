@@ -2,6 +2,7 @@ import { Link } from "react-router-dom"
 import { ArrowUpRight } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { StackTags } from "@/components/stack-tags"
+import { ProjectThumbnail } from "@/components/project-media"
 import type { Project } from "@/data/portfolio"
 
 export function ProjectCard({ project }: { project: Project }) {
@@ -13,17 +14,19 @@ export function ProjectCard({ project }: { project: Project }) {
         to={`/projects/${project.slug}`}
         className="flex h-full flex-col rounded-xl focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none"
       >
-        {/* Preview image (when present) */}
-        {project.screenshot && (
-          <div className="aspect-[16/9] overflow-hidden border-b border-border bg-muted">
-            <img
-              src={project.screenshot}
-              alt={`${project.name} preview`}
-              loading="lazy"
-              className="size-full object-cover transition-transform duration-500 group-hover/card:scale-[1.03]"
-            />
-          </div>
-        )}
+        {/* Preview image, or a branded placeholder */}
+        <div className="relative aspect-[16/9] overflow-hidden border-b border-border bg-muted">
+          <ProjectThumbnail project={project} />
+          {project.links.live && (
+            <span className="absolute top-3 right-3 inline-flex items-center gap-1.5 rounded-full bg-background/85 px-2.5 py-1 text-xs font-medium text-foreground shadow-sm backdrop-blur-sm">
+              <span className="relative flex size-2">
+                <span className="absolute inline-flex size-full animate-ping rounded-full bg-emerald-500 opacity-75" />
+                <span className="relative inline-flex size-2 rounded-full bg-emerald-500" />
+              </span>
+              Live
+            </span>
+          )}
+        </div>
 
         <CardHeader className="gap-2 p-6 pb-0">
           <div className="flex items-center gap-2 text-xs text-muted-foreground">
