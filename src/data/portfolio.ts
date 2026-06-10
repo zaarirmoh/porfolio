@@ -108,11 +108,11 @@ export const profile = {
   location: "Algeria (UTC+1)",
   email: "zaarirmo07@gmail.com",
   /**
-   * Contact-form backend. Paste a form endpoint here (e.g. Formspree
-   * "https://formspree.io/f/xxxxxx" or Web3Forms) and the form POSTs to it
-   * with inline success/error. Leave empty to fall back to a mailto: draft.
+   * Web3Forms access key (free, from https://web3forms.com — enter your
+   * email and copy the key). When set, the contact form POSTs to Web3Forms
+   * and messages land in your inbox. Leave empty to fall back to a mailto: draft.
    */
-  contactEndpoint: "",
+  web3formsAccessKey: "",
   /** CV lives in /public — drop your real PDF at this path to swap it. */
   cv: "/Mohamed_Rayan_Zaarir_CV.pdf",
   /** Filename the browser saves the CV as when downloaded. */

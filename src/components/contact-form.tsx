@@ -36,8 +36,8 @@ export function ContactForm() {
 
     setStatus("submitting")
 
-    // No backend configured → open a pre-filled email draft as a graceful fallback.
-    if (!profile.contactEndpoint) {
+    // No key configured → open a pre-filled email draft as a graceful fallback.
+    if (!profile.web3formsAccessKey) {
       const subject = encodeURIComponent(`Portfolio contact from ${payload.name}`)
       const body = encodeURIComponent(`${payload.message}\n\n— ${payload.name} (${payload.email})`)
       window.location.href = `mailto:${profile.email}?subject=${subject}&body=${body}`
@@ -47,12 +47,18 @@ export function ContactForm() {
     }
 
     try {
-      const res = await fetch(profile.contactEndpoint, {
+      const res = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify(payload),
+        body: JSON.stringify({
+          access_key: profile.web3formsAccessKey,
+          subject: `Portfolio contact from ${payload.name}`,
+          from_name: payload.name,
+          ...payload,
+        }),
       })
-      if (!res.ok) throw new Error("Request failed")
+      const json = await res.json()
+      if (!json.success) throw new Error("Request failed")
       setStatus("success")
       form.reset()
     } catch {

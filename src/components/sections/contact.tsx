@@ -102,7 +102,7 @@ export function Contact() {
                   <span className="absolute inline-flex size-full animate-ping rounded-full bg-emerald-500 opacity-75" />
                   <span className="relative inline-flex size-2 rounded-full bg-emerald-500" />
                 </span>
-                Open to remote roles — EU & US
+                Available for work — remote or in Algeria
               </span>
 
               <h2 className="mt-5 font-heading text-4xl font-semibold tracking-tight text-balance sm:text-5xl">
@@ -113,7 +113,7 @@ export function Contact() {
                 together
               </h2>
               <p className="mt-4 max-w-md text-lg text-muted-foreground">
-                Drop a note with the form — or reach me directly. I usually
+                Drop a note with the form, or reach me directly. I usually
                 reply within a day.
               </p>
 
@@ -148,7 +148,7 @@ export function Contact() {
                 </InfoRow>
 
                 <InfoRow icon={Globe} label="Location">
-                  Remote · UTC+1 — overlaps EU & US-East
+                  Algeria · UTC+1
                 </InfoRow>
 
                 <InfoRow icon={Clock} label="My local time">
