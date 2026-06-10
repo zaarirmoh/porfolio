@@ -108,7 +108,7 @@ export function Hero() {
                 asChild
                 className="h-12 px-6 text-base transition-transform hover:-translate-y-0.5 [&_svg]:size-5"
               >
-                <a href={profile.cv} download>
+                <a href={profile.cv} download={profile.cvFileName}>
                   <Download />
                   Download CV
                 </a>

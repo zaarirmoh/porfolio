@@ -109,6 +109,8 @@ export const profile = {
   contactEndpoint: "",
   /** CV lives in /public — drop your real PDF at this path to swap it. */
   cv: "/cv.pdf",
+  /** Filename the browser saves the CV as when downloaded. */
+  cvFileName: "Mohamed_Rayan_Zaarir_CV.pdf",
   /** Photos live in /public/images — see README notes. Optional. */
   heroImage: "/images/profile.svg",
   aboutImage: "/images/profile.svg",
