@@ -112,7 +112,7 @@ export const profile = {
    * email and copy the key). When set, the contact form POSTs to Web3Forms
    * and messages land in your inbox. Leave empty to fall back to a mailto: draft.
    */
-  web3formsAccessKey: "",
+  web3formsAccessKey: "13868ad8-0c74-44f2-999e-ff6d78228955",
   /** CV lives in /public — drop your real PDF at this path to swap it. */
   cv: "/Mohamed_Rayan_Zaarir_CV.pdf",
   /** Filename the browser saves the CV as when downloaded. */
