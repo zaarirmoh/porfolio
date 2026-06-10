@@ -13,9 +13,9 @@ export function HomePage() {
     <>
       <Hero />
       <FeaturedProjects />
-      <TechStack />
       <Experience />
       <About />
+      <TechStack />
       <Education />
       <Contact />
     </>

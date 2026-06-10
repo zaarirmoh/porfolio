@@ -25,6 +25,7 @@ export function Experience() {
       eyebrow="Track record"
       title="Experience"
       description="Impact first — what shipped and what it moved."
+      className="bg-muted/30"
     >
       <div className="relative">
         {/* Continuous rail: left on mobile, centered on md+ */}

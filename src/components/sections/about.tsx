@@ -6,7 +6,7 @@ import { profile, stats } from "@/data/portfolio"
 
 export function About() {
   return (
-    <Section id="about" eyebrow="About" title="A bit about me" className="bg-muted/30">
+    <Section id="about" eyebrow="About" title="A bit about me">
       <div className="grid gap-10 lg:grid-cols-[1fr_1.3fr] lg:items-start">
         {/* Portrait */}
         <FadeIn className="order-2 lg:order-1">

@@ -10,9 +10,9 @@ import { profile } from "@/data/portfolio"
 /** Section anchors on the landing page. */
 const NAV_LINKS = [
   { label: "Work", hash: "work" },
-  { label: "Stack", hash: "stack" },
   { label: "Experience", hash: "experience" },
   { label: "About", hash: "about" },
+  { label: "Stack", hash: "stack" },
   { label: "Contact", hash: "contact" },
 ] as const
 
