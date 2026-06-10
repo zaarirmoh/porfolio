@@ -6,9 +6,9 @@ import { profile } from "@/data/portfolio"
 
 const SECTION_LINKS = [
   { label: "Work", to: { pathname: "/", hash: "work" } },
-  { label: "Stack", to: { pathname: "/", hash: "stack" } },
   { label: "Experience", to: { pathname: "/", hash: "experience" } },
   { label: "About", to: { pathname: "/", hash: "about" } },
+  { label: "Stack", to: { pathname: "/", hash: "stack" } },
   { label: "Contact", to: { pathname: "/", hash: "contact" } },
   { label: "All projects", to: "/projects" },
 ] as const
@@ -32,8 +32,8 @@ export function Footer() {
               {profile.name}
             </Link>
             <p className="mt-3 text-sm text-muted-foreground">
-              Backend-leaning full-stack engineer. Open to remote roles across
-              the EU and US — let's build something solid.
+              Full-stack engineer building reliable web platforms end to end.
+              Open to new opportunities, remote or on-site in Algeria.
             </p>
             <div className="mt-4 flex items-center gap-1">
               <SocialLinks />
