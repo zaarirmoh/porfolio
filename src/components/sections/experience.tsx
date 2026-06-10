@@ -4,11 +4,12 @@ import { Section } from "@/components/section"
 import { experience } from "@/data/portfolio"
 import { cn } from "@/lib/utils"
 
-/** "Northwind Systems" → "NS" */
+/** "Northwind Systems" → "NS" (skips non-letter words like "&") */
 function initials(company: string) {
   return company
-    .split(" ")
+    .split(/\s+/)
     .map((w) => w[0])
+    .filter((c) => /[a-z]/i.test(c))
     .slice(0, 2)
     .join("")
     .toUpperCase()
@@ -24,7 +25,7 @@ export function Experience() {
       id="experience"
       eyebrow="Track record"
       title="Experience"
-      description="Impact first — what shipped and what it moved."
+      description="Platforms I've shipped for real clients and users over the past few years."
       className="bg-muted/30"
     >
       <div className="relative">
