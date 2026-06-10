@@ -231,16 +231,48 @@ export const experience: ExperienceItem[] = [
 ]
 
 /* -------------------------------------------------------------------------- */
-/*  Education                                                                   */
+/*  Education & certifications                                                  */
 /* -------------------------------------------------------------------------- */
+
+export type Certification = {
+  name: string
+  issuer: string
+  year: string
+  /** Optional credential / verification link. */
+  url?: string
+}
 
 export const education = {
   degree: "B.Sc. in Computer Science",
   school: "University of Example",
   period: "2015 — 2019",
   detail:
-    "Focus on distributed systems and databases. Graduated with honors; final-year project on fault-tolerant message delivery.",
+    "Final-year project on fault-tolerant message delivery — a replicated queue that survives node loss without dropping messages.",
+  honors: "Graduated with honors",
+  /** Short chips shown under the degree. */
+  focus: ["Distributed systems", "Databases", "Networking", "Algorithms"],
 }
+
+/** Placeholder certifications — swap for your real ones (or delete to hide). */
+export const certifications: Certification[] = [
+  {
+    name: "AWS Certified Solutions Architect — Associate",
+    issuer: "Amazon Web Services",
+    year: "2024",
+    url: "https://example.com",
+  },
+  {
+    name: "CKA: Certified Kubernetes Administrator",
+    issuer: "Cloud Native Computing Foundation",
+    year: "2023",
+    url: "https://example.com",
+  },
+  {
+    name: "PostgreSQL Professional Certification",
+    issuer: "EDB",
+    year: "2022",
+  },
+]
 
 /* -------------------------------------------------------------------------- */
 /*  Projects                                                                    */
