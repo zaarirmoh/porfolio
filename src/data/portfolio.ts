@@ -319,60 +319,6 @@ export const baccalaureate = {
 
 export const projects: Project[] = [
   {
-    slug: "encash",
-    name: "Encash",
-    problem:
-      "Households in France routinely overpay for electricity because comparing providers means decoding a dense bill and second-guessing which tariff actually fits their usage.",
-    summary:
-      "A web app for a French company where users upload their electricity bill, OCR pulls out the details, and the app recommends the best-value electricity provider for their real consumption. Fully bilingual in French and English.",
-    stack: [
-      "React",
-      "TypeScript",
-      "Redux Toolkit",
-      "Tailwind CSS",
-      "shadcn/ui",
-      "i18next",
-      "FastAPI",
-      "Python",
-      "MongoDB",
-      "OCR",
-      "JWT",
-    ],
-    metrics: [],
-    featured: true,
-    domain: "Energy · SaaS",
-    year: "2026",
-    architecture:
-      "A FastAPI backend over MongoDB (via the Beanie ODM) handles authentication, bill uploads, OCR text extraction, and provider recommendation. Users sign in with JWT, upload a bill, and the backend parses out consumption and tariff details, then matches them against a catalog of electricity providers to surface the best-value option.",
-    frontend:
-      "A React and TypeScript SPA with Redux Toolkit for state and Tailwind CSS with shadcn/ui for the interface. It's internationalized with i18next so the whole app works in both French and English, and talks to the API through Axios.",
-    decisions: [
-      {
-        title: "OCR-driven bill intake",
-        detail:
-          "Users upload a photo or PDF of their bill and an OCR step extracts the consumption and tariff details, so there's nothing to type in by hand.",
-      },
-      {
-        title: "Bilingual from day one",
-        detail:
-          "Built for a French audience, the app is fully internationalized with i18next so it works seamlessly in French and English.",
-      },
-      {
-        title: "Recommendation over a provider catalog",
-        detail:
-          "Extracted consumption is matched against a catalog of electricity providers to recommend the best-value option for each user.",
-      },
-    ],
-    challenges: [
-      {
-        title: "Reading varied bill formats",
-        detail:
-          "Electricity bills differ from one provider to the next, so the OCR and parsing layer has to reliably pull the same fields from inconsistent layouts.",
-      },
-    ],
-    links: {},
-  },
-  {
     slug: "yassir-distribution-platform",
     name: "Yassir Distribution & Inventory Platform",
     problem:
@@ -491,6 +437,103 @@ export const projects: Project[] = [
     links: {},
   },
   {
+    slug: "state-library-tisemsilt",
+    name: "State Library Platform — Tisemsilt",
+    problem:
+      "The official state library needed a modern, fast platform for thousands of monthly users, working with its existing PMB library system rather than replacing it.",
+    summary:
+      "A full-stack platform for the official State Library of Tisemsilt, serving thousands of monthly users and integrating with the PMB library system.",
+    stack: ["Django", "PostgreSQL", "Redis", "Docker"],
+    metrics: [
+      { label: "faster via Redis caching", value: "40%", side: "backend" },
+      { label: "monthly users", value: "1,000s", side: "backend" },
+    ],
+    featured: true,
+    domain: "Public Sector",
+    year: "2025",
+    architecture:
+      "A Django backend over PostgreSQL, integrated with the library's existing PMB system through JRPC web services. Redis caching cut response times by 40%, and the platform is containerized with Docker for scalable, reproducible deployment.",
+    frontend:
+      "A public-facing interface for thousands of monthly library users, built to stay fast under load.",
+    decisions: [
+      {
+        title: "Integrate, don't replace",
+        detail:
+          "Connected to the library's existing PMB system over JRPC web services instead of rebuilding it, meeting users where their data already lived.",
+      },
+      {
+        title: "Redis caching for speed",
+        detail:
+          "Cached hot reads in Redis, cutting response times by 40% for a public audience of thousands.",
+      },
+    ],
+    challenges: [
+      {
+        title: "Bridging a legacy system",
+        detail:
+          "PMB's JRPC interface had to be wrapped cleanly so the new platform could serve its data reliably to the public.",
+      },
+    ],
+    outcome:
+      "Delivered a fast, scalable public platform for the state library, 40% quicker after Redis caching and integrated with its existing catalog.",
+    links: {},
+  },
+  {
+    slug: "encash",
+    name: "Encash",
+    problem:
+      "Households in France routinely overpay for electricity because comparing providers means decoding a dense bill and second-guessing which tariff actually fits their usage.",
+    summary:
+      "A web app for a French company where users upload their electricity bill, OCR pulls out the details, and the app recommends the best-value electricity provider for their real consumption. Fully bilingual in French and English.",
+    stack: [
+      "React",
+      "TypeScript",
+      "Redux Toolkit",
+      "Tailwind CSS",
+      "shadcn/ui",
+      "i18next",
+      "FastAPI",
+      "Python",
+      "PostgreSQL",
+      "MongoDB",
+      "Google Vision OCR",
+      "JWT",
+    ],
+    metrics: [],
+    featured: true,
+    domain: "Energy · SaaS",
+    year: "2026",
+    architecture:
+      "A FastAPI backend handles authentication, bill uploads, OCR extraction, and provider recommendation, using PostgreSQL for core relational data and MongoDB (via the Beanie ODM) for flexible document storage like parsed bills. Uploaded bills run through Google Cloud Vision OCR to extract the text, which is parsed for consumption and tariff details and matched against a catalog of electricity providers to surface the best-value option.",
+    frontend:
+      "A React and TypeScript SPA with Redux Toolkit for state and Tailwind CSS with shadcn/ui for the interface. It's internationalized with i18next so the whole app works in both French and English, and talks to the API through Axios.",
+    decisions: [
+      {
+        title: "OCR-driven bill intake",
+        detail:
+          "Users upload a photo or PDF of their bill and Google Cloud Vision OCR extracts the text, which is parsed into consumption and tariff details, so there's nothing to type in by hand.",
+      },
+      {
+        title: "Bilingual from day one",
+        detail:
+          "Built for a French audience, the app is fully internationalized with i18next so it works seamlessly in French and English.",
+      },
+      {
+        title: "Recommendation over a provider catalog",
+        detail:
+          "Extracted consumption is matched against a catalog of electricity providers to recommend the best-value option for each user.",
+      },
+    ],
+    challenges: [
+      {
+        title: "Reading varied bill formats",
+        detail:
+          "Electricity bills differ from one provider to the next, so the OCR and parsing layer has to reliably pull the same fields from inconsistent layouts.",
+      },
+    ],
+    links: {},
+  },
+  {
     slug: "university-fyp-platform",
     name: "Final-Year Project Management Platform",
     problem:
@@ -510,7 +553,7 @@ export const projects: Project[] = [
       { label: "projects managed", value: "60+", side: "data" },
       { label: "users", value: "200+", side: "backend" },
     ],
-    featured: true,
+    featured: false,
     domain: "EdTech",
     year: "2025",
     architecture:
@@ -543,48 +586,6 @@ export const projects: Project[] = [
     ],
     outcome:
       "Gave a department one place to run 60+ final-year projects for 200+ users, with live collaboration replacing scattered spreadsheets and email.",
-    links: {},
-  },
-  {
-    slug: "state-library-tisemsilt",
-    name: "State Library Platform — Tisemsilt",
-    problem:
-      "The official state library needed a modern, fast platform for thousands of monthly users, working with its existing PMB library system rather than replacing it.",
-    summary:
-      "A full-stack platform for the official State Library of Tisemsilt, serving thousands of monthly users and integrating with the PMB library system.",
-    stack: ["Django", "PostgreSQL", "Redis", "Docker"],
-    metrics: [
-      { label: "faster via Redis caching", value: "40%", side: "backend" },
-      { label: "monthly users", value: "1,000s", side: "backend" },
-    ],
-    featured: false,
-    domain: "Public Sector",
-    year: "2025",
-    architecture:
-      "A Django backend over PostgreSQL, integrated with the library's existing PMB system through JRPC web services. Redis caching cut response times by 40%, and the platform is containerized with Docker for scalable, reproducible deployment.",
-    frontend:
-      "A public-facing interface for thousands of monthly library users, built to stay fast under load.",
-    decisions: [
-      {
-        title: "Integrate, don't replace",
-        detail:
-          "Connected to the library's existing PMB system over JRPC web services instead of rebuilding it, meeting users where their data already lived.",
-      },
-      {
-        title: "Redis caching for speed",
-        detail:
-          "Cached hot reads in Redis, cutting response times by 40% for a public audience of thousands.",
-      },
-    ],
-    challenges: [
-      {
-        title: "Bridging a legacy system",
-        detail:
-          "PMB's JRPC interface had to be wrapped cleanly so the new platform could serve its data reliably to the public.",
-      },
-    ],
-    outcome:
-      "Delivered a fast, scalable public platform for the state library, 40% quicker after Redis caching and integrated with its existing catalog.",
     links: {},
   },
   {
@@ -636,7 +637,7 @@ export const projects: Project[] = [
     stack: [
       "ESP32-CAM",
       "MQTT",
-      "Object Detection",
+      "YOLOv8",
       "Computer Vision",
       "Python",
       "RFID",
@@ -645,16 +646,16 @@ export const projects: Project[] = [
     metrics: [],
     featured: false,
     domain: "IoT · Computer Vision",
-    year: "2025",
+    year: "2026",
     architecture:
-      "Each cart carries an ESP32-CAM that streams video to a central in-store server, where an object-detection model identifies items as they're added. The cart has an LCD screen showing the running list and total, a button to switch modes, and indicator lights for feedback; devices talk to the server over MQTT. That same central server also hosts the cashier and admin backends and frontends. Every cart carries an RFID tag, so at checkout the cashier scans the tag to pull up the cart and everything in it, then takes payment by card or cash.",
+      "Each cart carries an ESP32-CAM that streams video to a central in-store server, where a YOLOv8 object-detection model identifies items as they're added. The cart has an LCD screen showing the running list and total, a button to switch modes, and indicator lights for feedback; devices talk to the server over MQTT. That same central server also hosts the cashier and admin backends and frontends. Every cart carries an RFID tag, so at checkout the cashier scans the tag to pull up the cart and everything in it, then takes payment by card or cash.",
     frontend:
       "Cashier and admin web interfaces (React) run on the store's central server. The cashier view shows a scanned cart's contents for a one-scan checkout, while the admin side manages the catalog and operations.",
     decisions: [
       {
         title: "Detection at the edge, model on the server",
         detail:
-          "The ESP32-CAM streams to a central server that runs the object-detection model, keeping the cart hardware cheap while centralizing the heavy compute.",
+          "The ESP32-CAM streams to a central server that runs a YOLOv8 object-detection model, keeping the cart hardware cheap while centralizing the heavy compute.",
       },
       {
         title: "MQTT for device messaging",
