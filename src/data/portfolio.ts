@@ -247,48 +247,32 @@ export const experience: ExperienceItem[] = [
 ]
 
 /* -------------------------------------------------------------------------- */
-/*  Education & certifications                                                  */
+/*  Education                                                                  */
 /* -------------------------------------------------------------------------- */
 
-export type Certification = {
-  name: string
-  issuer: string
-  year: string
-  /** Optional credential / verification link. */
-  url?: string
-}
-
 export const education = {
-  degree: "B.Sc. in Computer Science",
-  school: "University of Example",
-  period: "2015 — 2019",
+  degree: "Engineering & Master's Degree in Computer Science",
+  school: "Higher National School of Computer Science (ESI-SBA), Sidi Bel Abbès",
+  period: "2022 — 2027",
   detail:
-    "Final-year project on fault-tolerant message delivery — a replicated queue that survives node loss without dropping messages.",
-  honors: "Graduated with honors",
+    "Specializing in Software Engineering and System Design, with coursework spanning distributed systems, scalable architectures, databases, and algorithms.",
   /** Short chips shown under the degree. */
-  focus: ["Distributed systems", "Databases", "Networking", "Algorithms"],
+  focus: [
+    "Software Engineering",
+    "Distributed Systems",
+    "System Design",
+    "Algorithms",
+  ],
 }
 
-/** Placeholder certifications — swap for your real ones (or delete to hide). */
-export const certifications: Certification[] = [
-  {
-    name: "AWS Certified Solutions Architect — Associate",
-    issuer: "Amazon Web Services",
-    year: "2024",
-    url: "https://example.com",
-  },
-  {
-    name: "CKA: Certified Kubernetes Administrator",
-    issuer: "Cloud Native Computing Foundation",
-    year: "2023",
-    url: "https://example.com",
-  },
-  {
-    name: "PostgreSQL Professional Certification",
-    issuer: "EDB",
-    year: "2022",
-  },
-]
+export const baccalaureate = {
+  title: "Baccalaureate",
+  school: "Kritli Mokhtar High School, Blida",
+  period: "2022",
+  score: "17.60 / 20",
+  detail: "Graduated first in the city of Blida with distinction.",
+  highlight: "Ranked 1st in the city",
+}
 
 /* -------------------------------------------------------------------------- */
 /*  Projects                                                                    */
