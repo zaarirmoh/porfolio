@@ -101,11 +101,11 @@ export const profile = {
     "I design and build production-grade web platforms end to end: normalized PostgreSQL schemas, high-throughput REST APIs, modern React and Next.js interfaces, and the Docker and CI/CD pipelines that ship them. Backend architecture and scalable system design are my specialty, and I own features all the way from the database to the deployed UI.",
   /** Longer about copy (2–3 sentences). */
   about:
-    "I'm a full-stack engineer who likes owning a feature from the first Figma frame to the production dashboard that proves it works. My background is backend-heavy — data modeling, APIs, and the boring reliability work that keeps systems up — but I'm just as comfortable in a React codebase shipping accessible, fast interfaces. I care about systems that are simple to reason about and pleasant to use.",
-  /** Remote availability note. */
+    "I'm a full-stack engineer based in Algeria, currently completing a Master's in Computer Science at ESI-SBA with a focus on software engineering and system design. Over the past three years I've shipped production platforms for real clients, from distribution and inventory systems to financial workflows and real-time collaboration tools, owning each one from the database schema and API up to the deployed interface. Backend architecture is where I go deepest, and I care about clean, SOLID design, well-modeled data, and systems that stay fast and maintainable as they grow.",
+  /** Availability note. */
   availability:
-    "Available for remote roles. Based in UTC+1, with a working day that overlaps a full afternoon of EU hours and the US-East morning. Fluent, professional English — comfortable in async-first teams.",
-  location: "Remote · UTC+1",
+    "Open to new opportunities, whether fully remote or on-site and hybrid in Algeria. I'm comfortable working in async, English-speaking teams, and can collaborate in French and Arabic too.",
+  location: "Algeria (UTC+1)",
   email: "zaarirmo07@gmail.com",
   /**
    * Contact-form backend. Paste a form endpoint here (e.g. Formspree
@@ -138,9 +138,9 @@ export const heroPhrases: string[] = [
 /* -------------------------------------------------------------------------- */
 
 export const stats: Stat[] = [
-  { value: 150, suffix: "+", label: "database tables modeled" },
-  { value: 500, suffix: "+", label: "API endpoints shipped" },
-  { value: 3, suffix: "", label: "production systems running" },
+  { value: 3, suffix: "+", label: "years building software" },
+  { value: 5, suffix: "+", label: "full-stack platforms shipped" },
+  { value: 500, suffix: "+", label: "API endpoints built" },
 ]
 
 /* -------------------------------------------------------------------------- */

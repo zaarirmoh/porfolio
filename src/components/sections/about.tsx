@@ -37,7 +37,7 @@ export function About() {
                 </span>
                 <span className="inline-flex items-center gap-1.5 text-brand">
                   <Globe className="size-4" />
-                  Fluent English
+                  Arabic · English · French
                 </span>
               </div>
               <p className="text-sm text-muted-foreground">
