@@ -49,7 +49,7 @@ export function Hero() {
                   <span className="absolute inline-flex size-full animate-ping rounded-full bg-emerald-500 opacity-75" />
                   <span className="relative inline-flex size-2 rounded-full bg-emerald-500" />
                 </span>
-                Available for remote roles
+                Open to new opportunities
               </span>
             </motion.div>
 

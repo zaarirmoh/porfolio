@@ -85,15 +85,14 @@ export type Stat = {
 /* -------------------------------------------------------------------------- */
 
 export const profile = {
-  // TODO: replace with your real name / details.
-  name: "Mohammed Zaariri",
+  name: "Mohamed Rayan Zaarir",
   role: "Full-Stack Engineer",
   /** Hero identity line — leads full-stack, backend depth shows in the work. */
   positioning:
-    "Full-Stack Engineer · Backend-leaning · Remote (UTC+1 — overlaps EU & US-East)",
+    "Mohamed Rayan Zaarir — Full-Stack Engineer specializing in scalable backend architecture and modern web applications, based in Algeria (UTC+1)",
   /** One-sentence value prop. */
   valueProp:
-    "I build complete products end-to-end — from the interface through the API to the database and deployment — with a backend engineer's eye for reliability, clean data modeling, and performance.",
+    "I design and build production-grade web platforms end to end: normalized PostgreSQL schemas, high-throughput REST APIs, modern React and Next.js interfaces, and the Docker and CI/CD pipelines that ship them. Backend architecture and scalable system design are my specialty, and I own features all the way from the database to the deployed UI.",
   /** Longer about copy (2–3 sentences). */
   about:
     "I'm a full-stack engineer who likes owning a feature from the first Figma frame to the production dashboard that proves it works. My background is backend-heavy — data modeling, APIs, and the boring reliability work that keeps systems up — but I'm just as comfortable in a React codebase shipping accessible, fast interfaces. I care about systems that are simple to reason about and pleasant to use.",
@@ -101,7 +100,7 @@ export const profile = {
   availability:
     "Available for remote roles. Based in UTC+1, with a working day that overlaps a full afternoon of EU hours and the US-East morning. Fluent, professional English — comfortable in async-first teams.",
   location: "Remote · UTC+1",
-  email: "hello@example.com",
+  email: "zaarirmo07@gmail.com",
   /**
    * Contact-form backend. Paste a form endpoint here (e.g. Formspree
    * "https://formspree.io/f/xxxxxx" or Web3Forms) and the form POSTs to it
@@ -115,16 +114,15 @@ export const profile = {
   aboutImage: "/images/profile.svg",
   socials: {
     github: "https://github.com/zaarirmoh",
-    linkedin: "https://www.linkedin.com/in/your-handle",
+    linkedin: "https://www.linkedin.com/in/mohamed-zaarir-b24573265/",
   },
 } as const
 
 /** Rotating phrases for the animated hero title (typewriter). */
 export const heroPhrases: string[] = [
-  "Backend-leaning by default",
-  "Remote · UTC+1 (EU & US-East)",
-  "End-to-end product builder",
-  "APIs, data & clean interfaces",
+  "Scalable backend architecture",
+  "Modern React & Next.js interfaces",
+  "Dockerized, CI/CD-driven delivery",
 ]
 
 /* -------------------------------------------------------------------------- */

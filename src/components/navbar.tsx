@@ -61,11 +61,11 @@ export function Navbar() {
     }
   }, [menuOpen])
 
-  const initials = profile.name
-    .split(" ")
-    .map((w) => w[0])
-    .slice(0, 2)
-    .join("")
+  // First + last initial, e.g. "Mohamed Rayan Zaarir" → "MZ".
+  const nameParts = profile.name.trim().split(/\s+/)
+  const initials = (
+    nameParts[0][0] + nameParts[nameParts.length - 1][0]
+  ).toUpperCase()
 
   const linkClass = (isActive: boolean) =>
     cn(
