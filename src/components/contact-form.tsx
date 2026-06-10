@@ -66,7 +66,7 @@ export function ContactForm() {
       <motion.div
         initial={{ opacity: 0, scale: 0.96 }}
         animate={{ opacity: 1, scale: 1 }}
-        className="flex h-full flex-col items-center justify-center rounded-2xl border border-border bg-card p-10 text-center"
+        className="flex h-full min-h-96 flex-col items-center justify-center rounded-2xl border border-brand/30 bg-background/50 p-10 text-center backdrop-blur-sm"
       >
         <span className="grid size-14 place-items-center rounded-full bg-brand/15 text-brand">
           <Check className="size-7" />
@@ -89,13 +89,20 @@ export function ContactForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="rounded-2xl border border-border bg-card p-6 sm:p-8"
+      className="rounded-2xl border border-border bg-background/50 p-6 backdrop-blur-sm transition-all duration-300 focus-within:border-brand/40 focus-within:shadow-lg focus-within:shadow-brand/5 sm:p-8"
       noValidate
     >
       <div className="grid gap-5 sm:grid-cols-2">
         <div className="grid gap-2">
           <Label htmlFor="name">Name</Label>
-          <Input id="name" name="name" placeholder="Jane Doe" required autoComplete="name" />
+          <Input
+            id="name"
+            name="name"
+            placeholder="Jane Doe"
+            required
+            autoComplete="name"
+            className="h-12 focus-visible:border-brand/60 focus-visible:ring-brand/25"
+          />
         </div>
         <div className="grid gap-2">
           <Label htmlFor="email">Email</Label>
@@ -106,6 +113,7 @@ export function ContactForm() {
             placeholder="jane@company.com"
             required
             autoComplete="email"
+            className="h-12 focus-visible:border-brand/60 focus-visible:ring-brand/25"
           />
         </div>
       </div>
@@ -118,6 +126,7 @@ export function ContactForm() {
           placeholder="Tell me a bit about the role or project…"
           required
           rows={5}
+          className="min-h-32 focus-visible:border-brand/60 focus-visible:ring-brand/25"
         />
       </div>
 
@@ -139,7 +148,7 @@ export function ContactForm() {
         type="submit"
         size="lg"
         disabled={status === "submitting"}
-        className="mt-6 h-12 w-full px-6 text-base transition-transform hover:-translate-y-0.5 [&_svg]:size-5"
+        className="mt-6 h-12 w-full bg-brand px-6 text-base text-brand-foreground transition-all hover:-translate-y-0.5 hover:bg-brand/85 hover:shadow-lg hover:shadow-brand/20 [&_svg]:size-5"
       >
         {status === "submitting" ? (
           <>
