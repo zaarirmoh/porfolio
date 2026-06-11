@@ -35,7 +35,7 @@ export function Hero() {
       </div>
 
       <div className="mx-auto w-full max-w-6xl px-5 pt-36 pb-24 sm:px-6 sm:pt-44 sm:pb-32 lg:px-8">
-        <div className="grid items-center gap-12 lg:grid-cols-[1.45fr_1fr]">
+        <div className="grid items-center gap-12 lg:grid-cols-[1.2fr_1fr]">
           {/* Copy */}
           <motion.div
             variants={container}
@@ -122,7 +122,7 @@ export function Hero() {
             initial={reduce ? false : { opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
-            className="group relative mx-auto hidden w-full max-w-xs lg:block"
+            className="group relative mx-auto hidden w-full lg:block"
           >
             <div className="absolute -inset-6 -z-10 rounded-[2rem] bg-brand/15 blur-2xl transition-all duration-500 group-hover:bg-brand/25" />
             {/* Rotating gradient ring */}
