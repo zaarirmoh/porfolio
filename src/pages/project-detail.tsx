@@ -166,8 +166,9 @@ export function ProjectDetailPage() {
         )}
       </FadeIn>
 
-      {/* Media — carousel, single image, or branded placeholder */}
-      <FadeIn className="mt-10">
+      {/* Media — carousel, single image, or branded placeholder.
+          Breaks out wider than the text column so screenshots stand out. */}
+      <FadeIn className="relative left-1/2 mt-10 w-[min(64rem,calc(100vw-2.5rem))] -translate-x-1/2">
         <ProjectGallery project={project} />
       </FadeIn>
 

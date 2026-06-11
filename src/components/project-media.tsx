@@ -60,11 +60,11 @@ export function ProjectGallery({ project }: { project: Project }) {
 
   if (imgs.length === 1) {
     return (
-      <div className="overflow-hidden rounded-2xl border border-border bg-muted">
+      <div className="overflow-hidden rounded-2xl border border-border bg-muted/40">
         <img
           src={imgs[0]}
           alt={`${project.name} preview`}
-          className="aspect-[16/9] w-full object-cover"
+          className="aspect-[16/9] w-full object-contain"
         />
       </div>
     )
@@ -79,7 +79,7 @@ export function ProjectGallery({ project }: { project: Project }) {
   }
 
   return (
-    <div className="relative overflow-hidden rounded-2xl border border-border bg-muted">
+    <div className="relative overflow-hidden rounded-2xl border border-border bg-muted/40">
       <div className="relative aspect-[16/9] w-full">
         <AnimatePresence initial={false} custom={dir}>
           <motion.img
@@ -96,7 +96,7 @@ export function ProjectGallery({ project }: { project: Project }) {
             dragConstraints={{ left: 0, right: 0 }}
             dragElastic={0.2}
             onDragEnd={onDragEnd}
-            className="absolute inset-0 size-full cursor-grab object-cover active:cursor-grabbing"
+            className="absolute inset-0 size-full cursor-grab object-contain active:cursor-grabbing"
           />
         </AnimatePresence>
       </div>
