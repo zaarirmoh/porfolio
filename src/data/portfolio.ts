@@ -123,8 +123,8 @@ export const profile = {
   /** Filename the browser saves the CV as when downloaded. */
   cvFileName: "Mohamed_Rayan_Zaarir_CV.pdf",
   /** Photos live in /public/images — see README notes. Optional. */
-  heroImage: "/images/profile.svg",
-  aboutImage: "/images/profile.svg",
+  heroImage: "/images/profile-hero.jpg",
+  aboutImage: "/images/profile-about.jpg",
   socials: {
     github: "https://github.com/zaarirmoh",
     linkedin: "https://www.linkedin.com/in/mohamed-zaarir-b24573265/",
