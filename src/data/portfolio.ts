@@ -382,6 +382,7 @@ export const projects: Project[] = [
   },
   {
     slug: "lift-cable-platform",
+    screenshots: ["/projects/management-1.png", "/projects/management-2.png", "/projects/management-3.png", "/projects/management-4.png", "/projects/management-5.png"],
     name: "Lift & Cable Management Platform",
     problem:
       "A lift and cable installation company tracked projects, inventory, and invoicing by hand, with nothing tying clients, jobs, stock, and finances together.",
@@ -438,6 +439,7 @@ export const projects: Project[] = [
   },
   {
     slug: "state-library-tisemsilt",
+    screenshots: ["/projects/library-1.PNG", "/projects/library-2.PNG", "/projects/library-3.PNG", "/projects/library-4.PNG", "/projects/library-5.PNG", "/projects/library-6.PNG", "/projects/library-7.PNG", "/projects/library-8.PNG", "/projects/library-9.PNG"],
     name: "State Library Platform — Tisemsilt",
     problem:
       "The official state library needed a modern, fast platform for thousands of monthly users, working with its existing PMB library system rather than replacing it.",
@@ -480,6 +482,7 @@ export const projects: Project[] = [
   },
   {
     slug: "encash",
+    screenshots: ["/projects/enercash-1.png", "/projects/enercash-2.png", "/projects/enercash-3.png", "/projects/enercash-4.png", "/projects/enercash-5.png", "/projects/enercash-6.png", "/projects/enercash-7.png", "/projects/enercash-8.png"],
     name: "Encash",
     problem:
       "Households in France routinely overpay for electricity because comparing providers means decoding a dense bill and second-guessing which tariff actually fits their usage.",
@@ -535,6 +538,7 @@ export const projects: Project[] = [
   },
   {
     slug: "university-fyp-platform",
+    screenshots: ["/projects/pfe-1.jpg", "/projects/pfe-2.png", "/projects/pfe-3.png", "/projects/pfe-4.png", "/projects/pfe-5.png", "/projects/pfe-6.png"],
     name: "Final-Year Project Management Platform",
     problem:
       "Running final-year projects across many students and supervisors meant scattered spreadsheets and email, with no shared place to track a project through its lifecycle.",
@@ -590,6 +594,7 @@ export const projects: Project[] = [
   },
   {
     slug: "lotok-car-rental",
+    screenshots: ["/projects/lotok-1.png", "/projects/lotok-2.jpg", "/projects/lotok-3.png", "/projects/lotok-4.png", "/projects/lotok-5.png", "/projects/lotok-6.png"],
     name: "Lotok — Car Rental Platform",
     problem:
       "A car-rental service needed a mobile app and backend for browsing, booking, and managing cars, with quick, low-friction sign-in.",
