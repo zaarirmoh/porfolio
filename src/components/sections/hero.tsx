@@ -34,7 +34,7 @@ export function Hero() {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_55%,var(--background))]" />
       </div>
 
-      <div className="mx-auto w-full max-w-6xl px-5 pt-36 pb-24 sm:px-6 sm:pt-44 sm:pb-32 lg:px-8 2xl:max-w-[84rem]">
+      <div className="mx-auto w-full max-w-6xl px-5 pt-36 pb-24 sm:px-6 sm:pt-44 sm:pb-32 lg:px-8 2xl:max-w-[96rem]">
         <div className="grid items-center gap-12 lg:grid-cols-[1.2fr_1fr]">
           {/* Copy */}
           <motion.div

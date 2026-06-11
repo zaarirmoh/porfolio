@@ -18,7 +18,7 @@ export function Footer() {
 
   return (
     <footer className="border-t border-border bg-muted/30">
-      <div className="mx-auto w-full max-w-6xl px-5 py-14 sm:px-6 lg:px-8 2xl:max-w-[84rem]">
+      <div className="mx-auto w-full max-w-6xl px-5 py-14 sm:px-6 lg:px-8 2xl:max-w-[96rem]">
         <div className="flex flex-col gap-10 md:flex-row md:items-start md:justify-between">
           {/* Brand + pitch */}
           <div className="max-w-sm">

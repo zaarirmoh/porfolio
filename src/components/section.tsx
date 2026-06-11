@@ -36,7 +36,7 @@ export function Section({
     >
       <div
         className={cn(
-          "mx-auto w-full max-w-6xl px-5 sm:px-6 lg:px-8 2xl:max-w-[84rem]",
+          "mx-auto w-full max-w-6xl px-5 sm:px-6 lg:px-8 2xl:max-w-[96rem]",
           containerClassName,
         )}
       >
