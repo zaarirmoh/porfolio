@@ -229,7 +229,7 @@ export function ProjectDetailPage() {
                 <Button variant="outline" asChild>
                   <a href={links.live} target="_blank" rel="noopener noreferrer">
                     <ExternalLink className="size-4" />
-                    Live demo
+                    Live site
                   </a>
                 </Button>
               )}

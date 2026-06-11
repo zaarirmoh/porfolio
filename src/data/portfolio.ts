@@ -378,7 +378,7 @@ export const projects: Project[] = [
     ],
     outcome:
       "Replaced a patchwork of tools with a single platform for a 1,000-user distribution operation, with traceable inventory, reliable financial workflows, and changes shipped through GitLab CI/CD.",
-    links: {},
+    links: { docs: "https://51.254.104.61/swagger/" },
   },
   {
     slug: "lift-cable-platform",
@@ -434,7 +434,7 @@ export const projects: Project[] = [
     ],
     outcome:
       "Replaced manual project and invoice tracking with one platform spanning clients, jobs, inventory, invoicing, scheduling, and analytics.",
-    links: {},
+    links: { live: "http://5.135.241.51/" },
   },
   {
     slug: "state-library-tisemsilt",
@@ -476,7 +476,7 @@ export const projects: Project[] = [
     ],
     outcome:
       "Delivered a fast, scalable public platform for the state library, 40% quicker after Redis caching and integrated with its existing catalog.",
-    links: {},
+    links: { live: "https://bplptissemsilt.dz/" },
   },
   {
     slug: "encash",
@@ -531,7 +531,7 @@ export const projects: Project[] = [
           "Electricity bills differ from one provider to the next, so the OCR and parsing layer has to reliably pull the same fields from inconsistent layouts.",
       },
     ],
-    links: {},
+    links: { live: "https://enercash.vercel.app/" },
   },
   {
     slug: "university-fyp-platform",
@@ -586,7 +586,7 @@ export const projects: Project[] = [
     ],
     outcome:
       "Gave a department one place to run 60+ final-year projects for 200+ users, with live collaboration replacing scattered spreadsheets and email.",
-    links: {},
+    links: { repo: "https://github.com/zaarirmoh/PFE" },
   },
   {
     slug: "lotok-car-rental",
@@ -625,7 +625,7 @@ export const projects: Project[] = [
     ],
     outcome:
       "Shipped a car-rental Android app backed by booking and car-management services, with social sign-in for quick onboarding.",
-    links: {},
+    links: { repo: "https://github.com/zaarirmoh/Lotok" },
   },
   {
     slug: "smart-shopping-cart",
