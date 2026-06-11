@@ -88,7 +88,7 @@ export function Navbar() {
           : "border-b border-transparent bg-transparent",
       )}
     >
-      <nav className="mx-auto grid h-20 w-full max-w-6xl grid-cols-[1fr_auto_1fr] items-center px-5 sm:px-6 lg:px-8">
+      <nav className="mx-auto grid h-20 w-full max-w-6xl grid-cols-[1fr_auto_1fr] items-center px-5 sm:px-6 lg:px-8 2xl:max-w-[84rem]">
         {/* Brand */}
         <Link
           to="/"
