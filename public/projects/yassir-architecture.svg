@@ -1,0 +1,150 @@
+<svg viewBox="0 0 1280 720" xmlns="http://www.w3.org/2000/svg" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0e0e15"/>
+      <stop offset="1" stop-color="#09090d"/>
+    </linearGradient>
+    <linearGradient id="core" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#241733"/>
+      <stop offset="1" stop-color="#1a1326"/>
+    </linearGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#16161f" stroke-width="1"/>
+    </pattern>
+    <marker id="arrow" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto">
+      <path d="M0 0L6 3L0 6Z" fill="#52525f"/>
+    </marker>
+    <marker id="arrowP" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto">
+      <path d="M0 0L6 3L0 6Z" fill="#a855f7"/>
+    </marker>
+  </defs>
+
+  <rect width="1280" height="720" fill="url(#bg)"/>
+  <rect width="1280" height="720" fill="url(#grid)" opacity="0.6"/>
+
+  <!-- Title -->
+  <text x="60" y="58" fill="#f4f4f5" font-size="27" font-weight="700">System Architecture</text>
+  <text x="60" y="84" fill="#8b8b96" font-size="14.5">Yassir — Distribution &amp; Inventory Platform · Django REST backend serving mobile, desktop &amp; web clients</text>
+  <line x1="60" y1="98" x2="1220" y2="98" stroke="#23232e" stroke-width="1"/>
+
+  <!-- ============ BAND A — CLIENTS ============ -->
+  <text x="60" y="128" fill="#a855f7" font-size="12" font-weight="600" letter-spacing="2">CLIENTS</text>
+
+  <!-- Flutter mobile -->
+  <g>
+    <rect x="140" y="138" width="300" height="64" rx="12" fill="#15151d" stroke="#2c2c38" stroke-width="1.5"/>
+    <circle cx="174" cy="170" r="6" fill="#38bdf8"/>
+    <text x="196" y="166" fill="#f4f4f5" font-size="16" font-weight="600">Flutter Mobile App</text>
+    <text x="196" y="186" fill="#8b8b96" font-size="12.5">Field &amp; sales agents</text>
+  </g>
+  <!-- Desktop -->
+  <g>
+    <rect x="490" y="138" width="300" height="64" rx="12" fill="#15151d" stroke="#2c2c38" stroke-width="1.5"/>
+    <circle cx="524" cy="170" r="6" fill="#38bdf8"/>
+    <text x="546" y="166" fill="#f4f4f5" font-size="16" font-weight="600">Desktop Apps · ×3</text>
+    <text x="546" y="186" fill="#8b8b96" font-size="12.5">Depot &amp; back-office stations</text>
+  </g>
+  <!-- Web -->
+  <g>
+    <rect x="840" y="138" width="300" height="64" rx="12" fill="#15151d" stroke="#2c2c38" stroke-width="1.5"/>
+    <circle cx="874" cy="170" r="6" fill="#38bdf8"/>
+    <text x="896" y="166" fill="#f4f4f5" font-size="16" font-weight="600">Web Dashboard</text>
+    <text x="896" y="186" fill="#8b8b96" font-size="12.5">Admin &amp; reporting</text>
+  </g>
+
+  <!-- arrows A -> Nginx -->
+  <line x1="290" y1="202" x2="600" y2="236" stroke="#52525f" stroke-width="1.8" marker-end="url(#arrow)"/>
+  <line x1="640" y1="202" x2="640" y2="236" stroke="#52525f" stroke-width="1.8" marker-end="url(#arrow)"/>
+  <line x1="990" y1="202" x2="680" y2="236" stroke="#52525f" stroke-width="1.8" marker-end="url(#arrow)"/>
+  <text x="700" y="226" fill="#71717f" font-size="11.5">HTTPS · WSS</text>
+
+  <!-- ============ BAND B — EDGE / NGINX ============ -->
+  <rect x="400" y="240" width="480" height="56" rx="12" fill="#15151d" stroke="#2c2c38" stroke-width="1.5"/>
+  <text x="640" y="266" fill="#f4f4f5" font-size="16" font-weight="600" text-anchor="middle">Nginx — reverse proxy</text>
+  <text x="640" y="285" fill="#8b8b96" font-size="12.5" text-anchor="middle">TLS termination · load balancing · static &amp; media</text>
+
+  <!-- arrows Nginx -> servers -->
+  <line x1="560" y1="296" x2="450" y2="330" stroke="#a855f7" stroke-width="1.8" marker-end="url(#arrowP)"/>
+  <line x1="720" y1="296" x2="830" y2="330" stroke="#a855f7" stroke-width="1.8" marker-end="url(#arrowP)"/>
+
+  <!-- ============ BAND C — APP SERVERS ============ -->
+  <g>
+    <rect x="250" y="334" width="360" height="60" rx="12" fill="#15151d" stroke="#2c2c38" stroke-width="1.5"/>
+    <text x="430" y="360" fill="#f4f4f5" font-size="15.5" font-weight="600" text-anchor="middle">Gunicorn — REST API (WSGI)</text>
+    <text x="430" y="379" fill="#8b8b96" font-size="12" text-anchor="middle">synchronous request / response</text>
+  </g>
+  <g>
+    <rect x="670" y="334" width="360" height="60" rx="12" fill="#15151d" stroke="#2c2c38" stroke-width="1.5"/>
+    <text x="850" y="360" fill="#f4f4f5" font-size="15.5" font-weight="600" text-anchor="middle">Daphne — WebSockets (ASGI)</text>
+    <text x="850" y="379" fill="#8b8b96" font-size="12" text-anchor="middle">Django Channels · real-time updates</text>
+  </g>
+
+  <!-- arrows servers -> core -->
+  <line x1="430" y1="394" x2="500" y2="432" stroke="#52525f" stroke-width="1.8" marker-end="url(#arrow)"/>
+  <line x1="850" y1="394" x2="780" y2="432" stroke="#52525f" stroke-width="1.8" marker-end="url(#arrow)"/>
+
+  <!-- ============ BAND D — DJANGO CORE ============ -->
+  <rect x="190" y="436" width="900" height="104" rx="14" fill="url(#core)" stroke="#a855f7" stroke-width="1.6"/>
+  <text x="214" y="464" fill="#f4f4f5" font-size="17" font-weight="700">Django 5 + Django REST Framework</text>
+  <text x="214" y="485" fill="#c8a8e9" font-size="12.5">JWT auth (SimpleJWT) · role-based access · drf-yasg / Swagger · 500+ endpoints</text>
+  <!-- domain app chips -->
+  <g font-size="11.5" fill="#d4d4d8">
+    <rect x="214" y="498" width="78" height="24" rx="6" fill="#2a1f3a"/><text x="253" y="514" text-anchor="middle">sales</text>
+    <rect x="300" y="498" width="92" height="24" rx="6" fill="#2a1f3a"/><text x="346" y="514" text-anchor="middle">purchases</text>
+    <rect x="400" y="498" width="88" height="24" rx="6" fill="#2a1f3a"/><text x="444" y="514" text-anchor="middle">inventory</text>
+    <rect x="496" y="498" width="80" height="24" rx="6" fill="#2a1f3a"/><text x="536" y="514" text-anchor="middle">vehicles</text>
+    <rect x="584" y="498" width="76" height="24" rx="6" fill="#2a1f3a"/><text x="622" y="514" text-anchor="middle">renting</text>
+    <rect x="668" y="498" width="68" height="24" rx="6" fill="#2a1f3a"/><text x="702" y="514" text-anchor="middle">depots</text>
+    <rect x="744" y="498" width="76" height="24" rx="6" fill="#2a1f3a"/><text x="782" y="514" text-anchor="middle">products</text>
+    <rect x="828" y="498" width="92" height="24" rx="6" fill="#2a1f3a"/><text x="874" y="514" text-anchor="middle">notifications</text>
+    <rect x="928" y="498" width="58" height="24" rx="6" fill="#2a1f3a"/><text x="957" y="514" text-anchor="middle">users</text>
+    <rect x="994" y="498" width="72" height="24" rx="6" fill="#2a1f3a"/><text x="1030" y="514" text-anchor="middle">reports</text>
+  </g>
+
+  <!-- arrows core -> platform -->
+  <line x1="360" y1="540" x2="305" y2="578" stroke="#a855f7" stroke-width="1.8" marker-end="url(#arrowP)"/>
+  <text x="300" y="566" fill="#9a7bc0" font-size="11">tasks</text>
+  <line x1="520" y1="540" x2="540" y2="578" stroke="#52525f" stroke-width="1.8" marker-end="url(#arrow)"/>
+  <text x="548" y="566" fill="#71717f" font-size="11">ORM</text>
+  <line x1="700" y1="540" x2="700" y2="578" stroke="#52525f" stroke-width="1.8" marker-end="url(#arrow)"/>
+  <text x="708" y="566" fill="#71717f" font-size="11">cache · channels</text>
+  <line x1="900" y1="540" x2="960" y2="578" stroke="#52525f" stroke-width="1.8" marker-end="url(#arrow)"/>
+  <text x="900" y="566" fill="#71717f" font-size="11">push</text>
+
+  <!-- ============ BAND E — PLATFORM / DATA ============ -->
+  <text x="60" y="600" fill="#a855f7" font-size="12" font-weight="600" letter-spacing="2">ASYNC · DATA · SERVICES</text>
+
+  <!-- Celery workers -->
+  <g>
+    <rect x="70" y="610" width="218" height="74" rx="12" fill="#15151d" stroke="#2c2c38" stroke-width="1.5"/>
+    <text x="179" y="642" fill="#f4f4f5" font-size="15" font-weight="600" text-anchor="middle">Celery Workers</text>
+    <text x="179" y="663" fill="#8b8b96" font-size="11.5" text-anchor="middle">financial calc · background jobs</text>
+  </g>
+  <!-- Celery beat -->
+  <g>
+    <rect x="304" y="610" width="200" height="74" rx="12" fill="#15151d" stroke="#2c2c38" stroke-width="1.5"/>
+    <text x="404" y="642" fill="#f4f4f5" font-size="15" font-weight="600" text-anchor="middle">Celery Beat</text>
+    <text x="404" y="663" fill="#8b8b96" font-size="11.5" text-anchor="middle">scheduled / cron jobs</text>
+  </g>
+  <!-- Postgres -->
+  <g>
+    <rect x="520" y="610" width="200" height="74" rx="12" fill="#15151d" stroke="#3d6ae0" stroke-width="1.5"/>
+    <text x="620" y="642" fill="#f4f4f5" font-size="15" font-weight="600" text-anchor="middle">PostgreSQL</text>
+    <text x="620" y="663" fill="#8b8b96" font-size="11.5" text-anchor="middle">150+ normalized tables</text>
+  </g>
+  <!-- Redis -->
+  <g>
+    <rect x="736" y="610" width="200" height="74" rx="12" fill="#15151d" stroke="#d4503a" stroke-width="1.5"/>
+    <text x="836" y="642" fill="#f4f4f5" font-size="15" font-weight="600" text-anchor="middle">Redis</text>
+    <text x="836" y="663" fill="#8b8b96" font-size="11.5" text-anchor="middle">broker · channel layer · cache</text>
+  </g>
+  <!-- Firebase FCM -->
+  <g>
+    <rect x="952" y="610" width="218" height="74" rx="12" fill="#15151d" stroke="#e0a82e" stroke-width="1.5"/>
+    <text x="1061" y="642" fill="#f4f4f5" font-size="15" font-weight="600" text-anchor="middle">Firebase FCM</text>
+    <text x="1061" y="663" fill="#8b8b96" font-size="11.5" text-anchor="middle">push notifications</text>
+  </g>
+
+  <!-- footer tag -->
+  <text x="1220" y="708" fill="#3f3f4a" font-size="11.5" text-anchor="end">Containerized with Docker · deployed on DigitalOcean · GitLab CI/CD</text>
+</svg>

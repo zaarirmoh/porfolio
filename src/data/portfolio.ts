@@ -320,6 +320,7 @@ export const baccalaureate = {
 export const projects: Project[] = [
   {
     slug: "yassir-distribution-platform",
+    screenshots: ["/projects/yassir-architecture.svg"],
     name: "Yassir Distribution & Inventory Platform",
     problem:
       "A regional distribution operation ran orders, stock, and finances across disconnected tools, with no reliable real-time view of inventory or money owed across its different roles.",
