@@ -1,0 +1,131 @@
+<svg viewBox="0 0 1280 720" xmlns="http://www.w3.org/2000/svg" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0e0e15"/>
+      <stop offset="1" stop-color="#09090d"/>
+    </linearGradient>
+    <linearGradient id="core" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#241733"/>
+      <stop offset="1" stop-color="#1a1326"/>
+    </linearGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#16161f" stroke-width="1"/>
+    </pattern>
+    <marker id="arrow" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto">
+      <path d="M0 0L6 3L0 6Z" fill="#52525f"/>
+    </marker>
+    <marker id="arrowP" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto">
+      <path d="M0 0L6 3L0 6Z" fill="#a855f7"/>
+    </marker>
+  </defs>
+
+  <rect width="1280" height="720" fill="url(#bg)"/>
+  <rect width="1280" height="720" fill="url(#grid)" opacity="0.6"/>
+
+  <!-- Title -->
+  <text x="60" y="58" fill="#f4f4f5" font-size="27" font-weight="700">System Architecture</text>
+  <text x="60" y="84" fill="#8b8b96" font-size="14.5">Smart Shopping Cart — on-cart item detection, live total &amp; one-scan RFID checkout</text>
+  <line x1="60" y1="98" x2="1220" y2="98" stroke="#23232e" stroke-width="1"/>
+
+  <!-- ============ COLUMN 1 — SMART CART ============ -->
+  <rect x="60" y="138" width="330" height="468" rx="16" fill="#101017" stroke="#2c2c38" stroke-width="1.5"/>
+  <text x="84" y="170" fill="#38bdf8" font-size="12" font-weight="600" letter-spacing="2">SMART CART · edge device</text>
+
+  <g>
+    <rect x="82" y="186" width="286" height="60" rx="11" fill="#15151d" stroke="#2c2c38" stroke-width="1.5"/>
+    <circle cx="108" cy="216" r="5.5" fill="#38bdf8"/>
+    <text x="124" y="212" fill="#f4f4f5" font-size="15" font-weight="600">ESP32-CAM</text>
+    <text x="124" y="231" fill="#8b8b96" font-size="11.5">streams video of added items</text>
+  </g>
+  <g>
+    <rect x="82" y="256" width="286" height="60" rx="11" fill="#15151d" stroke="#2c2c38" stroke-width="1.5"/>
+    <circle cx="108" cy="286" r="5.5" fill="#34d399"/>
+    <text x="124" y="282" fill="#f4f4f5" font-size="15" font-weight="600">LCD Screen</text>
+    <text x="124" y="301" fill="#8b8b96" font-size="11.5">live item list + running total</text>
+  </g>
+  <g>
+    <rect x="82" y="326" width="286" height="60" rx="11" fill="#15151d" stroke="#2c2c38" stroke-width="1.5"/>
+    <circle cx="108" cy="356" r="5.5" fill="#fbbf24"/>
+    <text x="124" y="352" fill="#f4f4f5" font-size="15" font-weight="600">Mode Button + Lights ×2</text>
+    <text x="124" y="371" fill="#8b8b96" font-size="11.5">switch modes · status feedback</text>
+  </g>
+  <g>
+    <rect x="82" y="396" width="286" height="60" rx="11" fill="#15151d" stroke="#2c2c38" stroke-width="1.5"/>
+    <circle cx="108" cy="426" r="5.5" fill="#f472b6"/>
+    <text x="124" y="422" fill="#f4f4f5" font-size="15" font-weight="600">RFID Tag</text>
+    <text x="124" y="441" fill="#8b8b96" font-size="11.5">cart identity · scanned at till</text>
+  </g>
+  <text x="225" y="486" fill="#71717f" font-size="11.5" text-anchor="middle">firmware coordinates all parts</text>
+  <text x="225" y="504" fill="#71717f" font-size="11.5" text-anchor="middle">into one responsive device</text>
+
+  <!-- Cart -> Server : MQTT -->
+  <line x1="390" y1="300" x2="452" y2="300" stroke="#a855f7" stroke-width="2.2" marker-end="url(#arrowP)"/>
+  <text x="421" y="283" fill="#c8a8e9" font-size="12" text-anchor="middle" font-weight="600">MQTT</text>
+  <text x="421" y="320" fill="#8b8b96" font-size="10.5" text-anchor="middle">video + events</text>
+  <text x="421" y="333" fill="#8b8b96" font-size="10.5" text-anchor="middle">over Wi-Fi</text>
+
+  <!-- ============ COLUMN 2 — CENTRAL SERVER ============ -->
+  <rect x="460" y="138" width="380" height="468" rx="16" fill="url(#core)" stroke="#a855f7" stroke-width="1.6"/>
+  <text x="484" y="170" fill="#a855f7" font-size="12" font-weight="600" letter-spacing="2">CENTRAL IN-STORE SERVER</text>
+
+  <g>
+    <rect x="482" y="186" width="336" height="58" rx="11" fill="#15151d" stroke="#2c2c38" stroke-width="1.5"/>
+    <text x="650" y="211" fill="#f4f4f5" font-size="15" font-weight="600" text-anchor="middle">MQTT Broker</text>
+    <text x="650" y="230" fill="#8b8b96" font-size="11.5" text-anchor="middle">device messaging for many carts</text>
+  </g>
+  <line x1="650" y1="244" x2="650" y2="270" stroke="#a855f7" stroke-width="1.8" marker-end="url(#arrowP)"/>
+  <g>
+    <rect x="482" y="272" width="336" height="68" rx="11" fill="#2a1f3a" stroke="#a855f7" stroke-width="1.6"/>
+    <text x="650" y="299" fill="#f4f4f5" font-size="15.5" font-weight="700" text-anchor="middle">YOLOv8 — Object Detection</text>
+    <text x="650" y="320" fill="#c8a8e9" font-size="11.5" text-anchor="middle">computer vision · identifies items added</text>
+  </g>
+  <line x1="650" y1="340" x2="650" y2="366" stroke="#52525f" stroke-width="1.8" marker-end="url(#arrow)"/>
+  <g>
+    <rect x="482" y="368" width="336" height="58" rx="11" fill="#15151d" stroke="#2c2c38" stroke-width="1.5"/>
+    <text x="650" y="393" fill="#f4f4f5" font-size="15" font-weight="600" text-anchor="middle">Backend / API · Python</text>
+    <text x="650" y="412" fill="#8b8b96" font-size="11.5" text-anchor="middle">cart state · catalog · pricing</text>
+  </g>
+  <line x1="650" y1="426" x2="650" y2="452" stroke="#52525f" stroke-width="1.8" marker-end="url(#arrow)"/>
+  <g>
+    <rect x="482" y="454" width="336" height="58" rx="11" fill="#15151d" stroke="#3d6ae0" stroke-width="1.5"/>
+    <text x="650" y="479" fill="#f4f4f5" font-size="15" font-weight="600" text-anchor="middle">Database</text>
+    <text x="650" y="498" fill="#8b8b96" font-size="11.5" text-anchor="middle">catalog · carts · transactions</text>
+  </g>
+  <text x="650" y="544" fill="#71717f" font-size="11.5" text-anchor="middle">edge stays cheap · heavy compute centralized</text>
+
+  <!-- Server -> Checkout -->
+  <line x1="840" y1="397" x2="900" y2="300" stroke="#a855f7" stroke-width="1.9" marker-end="url(#arrowP)"/>
+  <line x1="840" y1="410" x2="900" y2="486" stroke="#52525f" stroke-width="1.8" marker-end="url(#arrow)"/>
+  <text x="872" y="350" fill="#9a7bc0" font-size="11" text-anchor="middle">REST</text>
+
+  <!-- ============ COLUMN 3 — CHECKOUT & OPS ============ -->
+  <rect x="890" y="138" width="330" height="468" rx="16" fill="#101017" stroke="#2c2c38" stroke-width="1.5"/>
+  <text x="914" y="170" fill="#34d399" font-size="12" font-weight="600" letter-spacing="2">CHECKOUT &amp; OPS</text>
+
+  <g>
+    <rect x="912" y="186" width="286" height="58" rx="11" fill="#15151d" stroke="#2c2c38" stroke-width="1.5"/>
+    <text x="1055" y="211" fill="#f4f4f5" font-size="15" font-weight="600" text-anchor="middle">RFID Reader</text>
+    <text x="1055" y="230" fill="#8b8b96" font-size="11.5" text-anchor="middle">scans cart tag at the till</text>
+  </g>
+  <line x1="1055" y1="244" x2="1055" y2="270" stroke="#52525f" stroke-width="1.8" marker-end="url(#arrow)"/>
+  <text x="1085" y="261" fill="#71717f" font-size="10.5">scan tag</text>
+  <g>
+    <rect x="912" y="272" width="286" height="58" rx="11" fill="#15151d" stroke="#2c2c38" stroke-width="1.5"/>
+    <text x="1055" y="297" fill="#f4f4f5" font-size="15" font-weight="600" text-anchor="middle">Cashier UI · React</text>
+    <text x="1055" y="316" fill="#8b8b96" font-size="11.5" text-anchor="middle">pulls full cart · one-scan checkout</text>
+  </g>
+  <line x1="1055" y1="330" x2="1055" y2="356" stroke="#52525f" stroke-width="1.8" marker-end="url(#arrow)"/>
+  <g>
+    <rect x="912" y="358" width="286" height="58" rx="11" fill="#15151d" stroke="#2c2c38" stroke-width="1.5"/>
+    <text x="1055" y="383" fill="#f4f4f5" font-size="15" font-weight="600" text-anchor="middle">Payment</text>
+    <text x="1055" y="402" fill="#8b8b96" font-size="11.5" text-anchor="middle">card · cash</text>
+  </g>
+  <g>
+    <rect x="912" y="458" width="286" height="58" rx="11" fill="#15151d" stroke="#2c2c38" stroke-width="1.5"/>
+    <text x="1055" y="483" fill="#f4f4f5" font-size="15" font-weight="600" text-anchor="middle">Admin UI · React</text>
+    <text x="1055" y="502" fill="#8b8b96" font-size="11.5" text-anchor="middle">catalog &amp; operations</text>
+  </g>
+
+  <!-- footer tag -->
+  <text x="1220" y="650" fill="#3f3f4a" font-size="11.5" text-anchor="end">ESP32-CAM firmware · MQTT messaging · YOLOv8 computer vision · React dashboards</text>
+</svg>

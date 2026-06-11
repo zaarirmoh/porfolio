@@ -635,6 +635,7 @@ export const projects: Project[] = [
   },
   {
     slug: "smart-shopping-cart",
+    screenshots: ["/projects/smart-cart-architecture.svg"],
     name: "Smart Shopping Cart",
     problem:
       "Supermarket checkout is slow: shoppers queue while a cashier scans every item one by one, and there's no view of a cart's contents until they reach the till.",
